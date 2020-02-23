@@ -2,7 +2,7 @@ from django.db import models
 
 class Item(models.Model):
     class Meta:
-        verbose_name = 'Iten'
+        verbose_name = 'Item'
 
     PRODUTOS = (
         ('Pizza Grande', 'Pizza Grande'),
