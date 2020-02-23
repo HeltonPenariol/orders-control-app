@@ -24,5 +24,4 @@ class Item(models.Model):
     preco = models.DecimalField(verbose_name='Valor do Produto', max_digits=5, decimal_places=2)
 
     def __str__(self):
-        return f'{self.tipo_produto} - {self.nome} - Valor: {self.preco}'
-    
+        return f'{self.tipo_produto} - {self.nome} - Valor: R${self.preco}'
