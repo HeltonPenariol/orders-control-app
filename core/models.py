@@ -1,8 +1,10 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Item(models.Model):
     class Meta:
         verbose_name = 'Item'
+        verbose_name_plural = 'Itens'
 
     PRODUTOS = (
         ('Pizza Grande', 'Pizza Grande'),
@@ -25,3 +27,18 @@ class Item(models.Model):
 
     def __str__(self):
         return f'{self.tipo_produto} - {self.nome} - Valor: R${self.preco}'
+
+class PedidoItem(models.Model):
+    class Meta:
+        verbose_name = 'Itens do Pedido'
+        verbose_name_plural = 'Itens do Pedido'
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.DO_NOTHING)
+    quantidade = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f'Qntd ({self.quantidade}) - Produto: {self.item} (pedido: #{self.user})'
+
+    def get_valor_item(self):
+        return self.quantidade * self.item.preco
