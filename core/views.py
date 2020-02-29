@@ -16,7 +16,7 @@ def gerar_numeros(tamanho):
         numero_pedido += choice(numeros)
     return numero_pedido
 
-def criar_pedido_delivery(request):
+def pagina_delivery(request):
     novo_username = gerar_numeros(4)
     novo_usuario = User.objects.create_user(novo_username)
     novo_usuario.set_password('ceara')
@@ -25,11 +25,6 @@ def criar_pedido_delivery(request):
     novo_usuario = authenticate(username=novo_usuario.username, password='ceara')
     login(request, novo_usuario)
 
-    novo_pedido = PedidoForm(request.POST or None)
-
-    args = {
-        'usuario': novo_usuario,
-        'form': novo_pedido,
-    }
-    template = 'criar_pedido_delivery.html'
+    args = {'usuario': novo_usuario}
+    template = 'delivery.html'
     return render(request, template, args)
