@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.http.response import JsonResponse
 from django.template.response import TemplateResponse
 from django.core.exceptions import ImproperlyConfigured
-from popup_field.fields import ForeignKeyWidget, ManyToManyWidget
+from popup.fields import ForeignKeyWidget, ManyToManyWidget
 
 if django.VERSION >= (2, 0):
     from django.urls import path, include
