@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from core.models import *
+from core.forms import PedidoForm
 from random import choice
 
 def pagina_inicial(request):
@@ -22,9 +23,13 @@ def criar_pedido_delivery(request):
     novo_usuario.save()
 
     novo_usuario = authenticate(username=novo_usuario.username, password='ceara')
-    print(novo_usuario)
     login(request, novo_usuario)
 
-    args = {'usuario':novo_usuario}
+    novo_pedido = PedidoForm(request.POST or None)
+
+    args = {
+        'usuario': novo_usuario,
+        'form': novo_pedido,
+    }
     template = 'criar_pedido_delivery.html'
     return render(request, template, args)
