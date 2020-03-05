@@ -16,4 +16,6 @@ class PedidoForm(forms.ModelForm):
         exclude = ('user',)
         widgets = {
             'itens': PedidoItemPopupCRUDViewSet.get_m2m_popup_field(),
-        }
+            'horario_recebimento': forms.widgets.DateTimeInput(format="%d %b %Y %H:%M"),
+            'horario_atualizacao': forms.widgets.DateTimeInput(format="%d %b %Y %H:%M"),
+       }

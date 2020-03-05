@@ -24,7 +24,9 @@ class PopupCreateView(PermissionRequiredMixin, CreateView):
         return super(PopupCreateView, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
-        self.object = form.save()
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
         context = {'op': 'create', 'id': self.object.id, 'value': self.object.__str__()}
         if 'to_field' in self.request.GET:
             context['to_field'] = self.request.GET['to_field']

@@ -38,7 +38,7 @@ class PedidoItem(models.Model):
     quantidade = models.PositiveIntegerField(default=1)
 
     def __str__(self):
-        return f'Qntd ({self.quantidade}) - Produto: {self.item} (pedido: #{self.user})'
+        return f'Qntd ({self.quantidade}) - Produto: {self.item})'
 
     def get_valor_item(self):
         return self.quantidade * self.item.preco

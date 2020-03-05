@@ -31,7 +31,7 @@ def pagina_delivery(request):
     template = 'delivery.html'
     return render(request, template, args)
 
-class PedidoDelivery(CreateView):
+class PedidoDeliveryCreateView(CreateView):
     raise_exception = True
     form_class = PedidoForm
     template_name = 'criar_pedido_delivery.html'
@@ -44,6 +44,6 @@ class PedidoDelivery(CreateView):
         return redirect('/')
 
     def get_form_kwargs(self):
-        kwargs = super(PedidoDelivery, self).get_form_kwargs()
+        kwargs = super(PedidoDeliveryCreateView, self).get_form_kwargs()
         kwargs['request'] = self.request
         return kwargs
