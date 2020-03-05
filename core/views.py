@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.views.generic import CreateView
 from core.models import *
-from core.forms import PedidoForm
+from core.forms import PedidoForm, StatusPedidoForm
 from datetime import datetime, timedelta
 from random import choice
 
@@ -43,7 +43,7 @@ class PedidoDeliveryCreateView(CreateView):
         self.object.user = self.request.user
         self.object.save()
         form.save_m2m()
-        return redirect('/')
+        return redirect('/delivery/pedidos/')
 
     def get_form_kwargs(self):
         kwargs = super(PedidoDeliveryCreateView, self).get_form_kwargs()
@@ -56,4 +56,17 @@ def listar_pedidos_delivery(request):
     pedidos_delivery = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()
     args = {'pedidos': pedidos_delivery}
     template = 'pedidos_delivery.html'
+    return render(request, template, args)
+
+def editar_status_delivery(request, id):
+    pedido = Pedido.objects.get(pk=id)
+    status_pedido = StatusPedidoForm(request.POST or None, instance=pedido)
+    args = {'form': status_pedido}
+
+    if status_pedido.is_valid():
+        status_pedido.save()
+        return redirect('/delivery/pedidos/')
+
+    template = 'editar_status_delivery.html'
+    
     return render(request, template, args)

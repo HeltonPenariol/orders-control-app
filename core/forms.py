@@ -13,9 +13,15 @@ class PedidoForm(forms.ModelForm):
     class Meta:
         model = Pedido
         fields = '__all__'
-        exclude = ('user',)
+        exclude = ('user', 'status', 'pagamento_conclusao',)
         widgets = {
             'itens': PedidoItemPopupCRUDViewSet.get_m2m_popup_field(),
             'horario_recebimento': forms.widgets.DateTimeInput(),
             'horario_atualizacao': forms.widgets.DateTimeInput(),
        }
+
+
+class StatusPedidoForm(forms.ModelForm):
+    class Meta:
+        model = Pedido
+        fields = ['status', 'pagamento_conclusao',]

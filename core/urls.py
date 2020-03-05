@@ -7,6 +7,7 @@ urlpatterns = [
     path('delivery/', pagina_delivery, name='pagina_delivery'),
     path('delivery/criar-pedido/', PedidoDeliveryCreateView.as_view(), name='criar_pedido_delivery'),
     path('delivery/pedidos/', listar_pedidos_delivery, name='listar_pedidos_delivery'),
+    path('delivery/pedidos/status/<int:id>', editar_status_delivery, name='editar_status_delivery'),
 
     PedidoItemPopupCRUDViewSet.urls(),
 ]

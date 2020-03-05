@@ -26,7 +26,7 @@ class Item(models.Model):
     preco = models.DecimalField(verbose_name='Valor do Produto', max_digits=5, decimal_places=2)
 
     def __str__(self):
-        return f'{self.tipo_produto} - {self.nome} - Valor: R${self.preco}'
+        return f'{self.tipo_produto} - {self.nome}'
 
 class PedidoItem(models.Model):
     class Meta:
@@ -55,9 +55,14 @@ class Pedido(models.Model):
     )
 
     PAGAMENTOS = (
-        ('Maquininha (Cartão)', 'Maquininha (Cartão)'),
+        ('Maquininha', 'Maquininha'),
         ('Dinheiro', 'Dinheiro'),
-        ('Dinheiro (TROCO)', 'Dinheiro (TROCO)'),
+    )
+
+    CONCLUSOES_PAGAMENTO = (
+        ('Dinheiro', 'Dinheiro'),
+        ('Débito', 'Débito'),
+        ('Crédito', 'Crédito'),
     )
 
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
@@ -65,7 +70,11 @@ class Pedido(models.Model):
     telefone = models.CharField(verbose_name='Telefone do Cliente', max_length=255, blank=True)
     itens = models.ManyToManyField(PedidoItem)
     taxa_entrega = models.DecimalField(verbose_name='Taxa de Entrega', max_digits=3, decimal_places=2, default=3)
+    taxa_adicional = models.DecimalField(verbose_name='Taxas Adicionais', max_digits=3, decimal_places=2, default=0)
+    desconto = models.DecimalField(verbose_name='Descontos', max_digits=3, decimal_places=2, default=0)
     pagamento = models.CharField(verbose_name='Forma de Pagamento', max_length=255, choices=PAGAMENTOS)
+    pagamento_conclusao = models.CharField(verbose_name='Conclusão do Pagamento', max_length=255, choices=CONCLUSOES_PAGAMENTO, blank=True)
+    necessidade_troco = models.BooleanField(verbose_name='Troco', default=False)
     horario_recebimento = models.DateTimeField(verbose_name='Horário de Recebimento', auto_now_add=True)
     horario_atualizacao = models.DateTimeField(verbose_name='Horário de Atualização', auto_now=True)
     status = models.CharField(verbose_name='Status do Pedido', max_length=255, choices=STATUS, default='Em preparo')
@@ -85,6 +94,8 @@ class Pedido(models.Model):
     def get_valor_total(self):
         total = 0
         total += self.taxa_entrega
+        total += self.taxa_adicional
+        total -= self.desconto
 
         for item in self.itens.all():
             total += item.get_valor_item()

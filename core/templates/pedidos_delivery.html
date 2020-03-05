@@ -9,12 +9,25 @@
     {% for pedido in pedidos %}
         <h3>Pedido: #ceara{{pedido.user}}</h3>
         <p>Rua: {{pedido.rua}}</p>
-        <p>Telefone: {{pedido.telefone|default:"Nenhum telefone registrado."}}</p>
+        <p>Telefone: {{pedido.telefone|default:"Nenhum telefone registrado"}}</p>
+        <p>Status: {{pedido.status}}</p>
         <p>Horário de Recebimento: {{pedido.horario_recebimento}}</p>
         <p>Horário de Atualização: {{pedido.horario_atualizacao}}</p>
+        {% for item in pedido.itens.all %}
+            <p>{{item.quantidade}} {{item.item}} ({{item.get_valor_item}})</p>
+        {% endfor %}
         <p>Subtotal: R${{pedido.get_valor_pedido}}</p>
         <p>Taxa de Entrega: R${{pedido.taxa_entrega}}</p>
+        <p>Taxas Adicionais: R${{pedido.taxa_adicional}}</p>
+        <p>Descontos: R${{pedido.desconto}}</p>
         <p>Total: R${{pedido.get_valor_total}}</p>
+        <p>Forma de Pagamento: {{pedido.pagamento}}</p>
+        {% if pedido.necessidade_troco == True %}
+            <p>Troco necessário</p>
+        {% elif pedido.necessidade_troco == False %}
+            <p>Troco não necessário</p>
+        {% endif %}
+        <a href="/delivery/pedidos/status/{{pedido.id}}">alterar status</a>
         <hr>
     {% endfor %}
 {% endblock body %}
