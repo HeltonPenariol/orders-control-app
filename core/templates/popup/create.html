@@ -1,0 +1,30 @@
+{% extends "popup/base.html" %}
+{% block css %}
+    {% load static %}
+    <!-- <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}"> -->
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'layui/layui.js' %}"></script>
+{% endblock %}
+
+{% block main %}
+    <form method="post" action="{{ request.path }}{% if to_field %}?to_field={{ to_field }}{% endif %}">
+        {% csrf_token %}
+        {{ form.media }}
+        {% for field in form %}
+            <div>
+                <label>
+                    {{field.label_tag}}
+                </label>
+
+                <div>
+                    {{field}}
+                </div>
+            </div>
+        {% endfor %}
+        <div>
+            <button type="submit">Adicionar</button>
+        </div>
+    </form>
+{% endblock %}
