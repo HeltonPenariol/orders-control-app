@@ -58,6 +58,12 @@ def listar_pedidos_delivery(request):
     template = 'pedidos_delivery.html'
     return render(request, template, args)
 
+def visualizar_comanda_delivery(request, id):
+    comanda = Pedido.objects.get(pk=id)
+    args = {'comanda':comanda}
+    template = 'visualizar_comanda_delivery.html'
+    return render(request, template, args)
+
 class PedidoDeliveryUpdateView(UpdateView):
     model = Pedido
     form_class = PedidoForm
