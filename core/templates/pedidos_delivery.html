@@ -1,0 +1,19 @@
+{% extends 'shared/base.html' %}
+
+{% block title %}
+    <title>Delivery</title>
+{% endblock title %}
+
+{% block body %}
+    {% for pedido in pedidos %}
+        <h3>Pedido: #ceara{{pedido.user}}</h3>
+        <p>Rua: {{pedido.rua}}</p>
+        <p>Telefone: {{pedido.telefone|default:"Nenhum telefone registrado."}}</p>
+        <p>Horário de Recebimento: {{pedido.horario_recebimento}}</p>
+        <p>Horário de Atualização: {{pedido.horario_atualizacao}}</p>
+        <p>Subtotal: R${{pedido.get_valor_pedido}}</p>
+        <p>Taxa de Entrega: R${{pedido.taxa_entrega}}</p>
+        <p>Total: R${{pedido.get_valor_total}}</p>
+        <hr>
+    {% endfor %}
+{% endblock body %}

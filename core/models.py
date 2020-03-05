@@ -81,3 +81,12 @@ class Pedido(models.Model):
             total += item.get_valor_item()
         
         return total
+
+    def get_valor_total(self):
+        total = 0
+        total += self.taxa_entrega
+
+        for item in self.itens.all():
+            total += item.get_valor_item()
+        
+        return total

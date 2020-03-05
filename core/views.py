@@ -41,9 +41,16 @@ class PedidoDeliveryCreateView(CreateView):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
+        form.save_m2m()
         return redirect('/')
 
     def get_form_kwargs(self):
         kwargs = super(PedidoDeliveryCreateView, self).get_form_kwargs()
         kwargs['request'] = self.request
         return kwargs
+
+def listar_pedidos_delivery(request):
+    pedidos_delivery = Pedido.objects.all()
+    args = {'pedidos': pedidos_delivery}
+    template = 'pedidos_delivery.html'
+    return render(request, template, args)
