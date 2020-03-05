@@ -27,6 +27,7 @@
         {% elif pedido.necessidade_troco == False %}
             <p>Troco não necessário</p>
         {% endif %}
+        <a href="/delivery/pedidos/editar/{{pedido.id}}">alterar pedido</a>
         <a href="/delivery/pedidos/status/{{pedido.id}}">alterar status</a>
         <hr>
     {% endfor %}
