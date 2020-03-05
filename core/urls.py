@@ -9,6 +9,7 @@ urlpatterns = [
     path('delivery/pedidos/', listar_pedidos_delivery, name='listar_pedidos_delivery'),
     path('delivery/pedidos/editar/<int:pk>', PedidoDeliveryUpdateView.as_view(), name='editar_pedido_delivery'),
     path('delivery/pedidos/status/<int:id>', editar_status_delivery, name='editar_status_delivery'),
+    path('delivery/pedidos/deletar/<int:id>', deletar_pedido_delivery, name='deletar_pedido_delivery'),
 
     PedidoItemPopupCRUDViewSet.urls(),
 ]

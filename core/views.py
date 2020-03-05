@@ -87,3 +87,8 @@ def editar_status_delivery(request, id):
 
     template = 'editar_status_delivery.html'
     return render(request, template, args)
+
+def deletar_pedido_delivery(request, id):
+    pedido = Pedido.objects.get(pk=id)
+    pedido.delete()
+    return redirect('/delivery/pedidos/')
