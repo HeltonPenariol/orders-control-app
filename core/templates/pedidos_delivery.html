@@ -5,6 +5,7 @@
 {% endblock title %}
 
 {% block body %}
+    <h1>Pedidos criados nas últimas 8 horas</h1>
     {% for pedido in pedidos %}
         <h3>Pedido: #ceara{{pedido.user}}</h3>
         <p>Rua: {{pedido.rua}}</p>

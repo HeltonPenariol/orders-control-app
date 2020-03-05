@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.views.generic import CreateView
 from core.models import *
 from core.forms import PedidoForm
+from datetime import datetime, timedelta
 from random import choice
 
 def pagina_inicial(request):
@@ -50,7 +51,9 @@ class PedidoDeliveryCreateView(CreateView):
         return kwargs
 
 def listar_pedidos_delivery(request):
-    pedidos_delivery = Pedido.objects.all()
+    tempo_atual = datetime.now()
+    tempo_limite = tempo_atual - timedelta(hours=8)
+    pedidos_delivery = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()
     args = {'pedidos': pedidos_delivery}
     template = 'pedidos_delivery.html'
     return render(request, template, args)
