@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block static %}
-<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
+    <script defer src="{% static 'imprimir.js' %}"></script>
     <link rel="stylesheet" href="{% static 'comanda_delivery.css' %}">
 {% endblock %}
 
@@ -11,44 +12,47 @@
 {% endblock title %}
 
 {% block body %}
-    <h3>CEARÁ</h3>
-    <h4>comanda: #ceara{{comanda.user}}</h4>
-    <p>{{comanda.horario_recebimento}}</p>
-    <p><strong>Endereço: </strong><br>{{comanda.rua}}</p>
-    <p><strong>Telefone: </strong><br>{{pedido.telefone|default:"Nenhum telefone informado"}}</p>
-    <hr>
-    <h4>ITENS DO PEDIDO</h4>
-    {% for item in comanda.itens.all %}
+    <div id="comanda">
+        <h3>CEARÁ</h3>
+        <h4>comanda: #ceara{{comanda.user}}</h4>
+        <p>{{comanda.horario_recebimento}}</p>
+        <p><strong>Endereço: </strong><br>{{comanda.rua}}</p>
+        <p><strong>Telefone: </strong><br>{{pedido.telefone|default:"Nenhum telefone informado"}}</p>
+        <hr>
+        <h4>ITENS DO PEDIDO</h4>
+        {% for item in comanda.itens.all %}
         <p class="itens"><strong>{{item.quantidade}}</strong> {{item.item}} (R${{item.get_valor_item}})</p>
-    {% endfor %}
-    <p class="observacao">Observações: {{comanda.observacao|default:"Nenhuma informada"}}</p>
-    <hr>
-    <div class="valores">
-        <p>*SUBTOTAL......................</p>
-        <p>R${{comanda.get_valor_pedido}}</p>
-    </div>
-    <div class="valores">
-        <p>+TAXA DE ENTREGA.......</p>
-        <p>R${{comanda.taxa_entrega}}</p>
-    </div>
-    <div class="valores">
-        <p>+TAXAS ADICIONAIS.......</p>
-        <p>R${{comanda.taxa_adicional}}</p>
-    </div>
-    <div class="valores">
-        <p>-DESCONTOS....................</p> 
-        <p>R${{comanda.desconto}}</p>
-    </div>
-    <div class="valores">
-        <p><strong>=TOTAL A PAGAR...........</strong></p>
-        <p>R${{comanda.get_valor_total}}</p>
-    </div>
-    <p class="pagamento">Forma de Pagamento: <strong>{{comanda.pagamento}}</strong></p>
-    {% if comanda.necessidade_troco == True %}
+        {% endfor %}
+        <p class="observacao">Observações: {{comanda.observacao|default:"Nenhuma informada"}}</p>
+        <hr>
+        <div class="valores">
+            <p>*SUBTOTAL......................</p>
+            <p>R${{comanda.get_valor_pedido}}</p>
+        </div>
+        <div class="valores">
+            <p>+TAXA DE ENTREGA.......</p>
+            <p>R${{comanda.taxa_entrega}}</p>
+        </div>
+        <div class="valores">
+            <p>+TAXAS ADICIONAIS.......</p>
+            <p>R${{comanda.taxa_adicional}}</p>
+        </div>
+        <div class="valores">
+            <p>-DESCONTOS....................</p> 
+            <p>R${{comanda.desconto}}</p>
+        </div>
+        <div class="valores">
+            <p><strong>=TOTAL A PAGAR...........</strong></p>
+            <p>R${{comanda.get_valor_total}}</p>
+        </div>
+        <p class="pagamento">Forma de Pagamento: <strong>{{comanda.pagamento}}</strong></p>
+        {% if comanda.necessidade_troco == True %}
         <p class="troco">*Troco necessário*</p>
-    {% elif comanda.necessidade_troco == False %}
+        {% elif comanda.necessidade_troco == False %}
         <p class="troco">*Troco não necessário*</p>
-    {% endif %}
-    <hr>
-    <p class="rodape">Pizzaria e Hamburgueria do Ceará</p>
+        {% endif %}
+        <hr>
+        <p class="rodape">Pizzaria e Hamburgueria do Ceará</p>
+    </div>
+    <input type="button" onclick="imprimirComanda('comanda')" value="Imprimir Comanda">
 {% endblock body %}
