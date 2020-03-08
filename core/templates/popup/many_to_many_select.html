@@ -18,9 +18,9 @@
 {% include "django/forms/widgets/select.html" %}
 
 <div>
-    {% if can_add %}<a id="{{ widget.attrs.id }}_add">Adicionar Item</a>{% endif %}
-    {% if can_update %}<a id="{{ widget.attrs.id }}_change">Editar Item</a>{% endif %}
-    {% if can_delete %}<a id="{{ widget.attrs.id }}_delete">Deletar Item</a>{% endif %}
+    {% if can_add %}<a class="layui-btn layui-btn-mini" id="{{ widget.attrs.id }}_add">Adicionar</a>{% endif %}
+    {% if can_update %}<a class="layui-btn layui-btn-mini layui-btn-disabled layui-btn-normal" id="{{ widget.attrs.id }}_change">Editar</a>{% endif %}
+    {% if can_delete %}<a class="layui-btn layui-btn-mini layui-btn-disabled layui-btn-danger" id="{{ widget.attrs.id }}_delete">Deletar</a>{% endif %}
 </div>
 
 <script>
