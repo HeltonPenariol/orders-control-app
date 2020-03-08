@@ -4,6 +4,8 @@
 {% block static %}
     <script src="{% static 'jquery/jquery-2.1.3.min.js' %}"></script>
     <script src="{% static 'layui/layui.js' %}"></script>
+    <script defer src="{% static 'inputconfig.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'criar_pedido_delivery.css' %}">
 {% endblock static %}
 
 {% block title %}
@@ -27,6 +29,24 @@
         {% endfor %}
         <button type="submit">Finalizar</button>
     </form>
+
+    <div>
+        <button onclick="maisTaxaEntrega()">adicionar taxa de entrega</button>
+        <button onclick="menosTaxaEntrega()">subtrair taxa de entrega</button>
+        <button onclick="removerTaxaEntrega()">remover taxa de entrega</button>
+    </div>
+
+    <div>
+        <button onclick="adicionarTaxa()">adicionar taxa adicional</button>
+        <button onclick="subtrairTaxa()">subtrair taxa adicional</button>
+        <button onclick="removerTaxa()">remover taxa</button>
+    </div>
+
+    <div>
+        <button onclick="adicionarDesconto()">adicionar desconto</button>
+        <button onclick="subtrairDesconto()">subtrair desconto</button>
+        <button onclick="removerDesconto()">remover desconto</button>
+    </div>
 
     <script>
         layui.use(['form'], function () {

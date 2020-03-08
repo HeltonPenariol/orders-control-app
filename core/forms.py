@@ -16,8 +16,9 @@ class PedidoForm(forms.ModelForm):
         exclude = ('user', 'status', 'pagamento_conclusao',)
         widgets = {
             'itens': PedidoItemPopupCRUDViewSet.get_m2m_popup_field(),
-            'horario_recebimento': forms.widgets.DateTimeInput(),
-            'horario_atualizacao': forms.widgets.DateTimeInput(),
+            'taxa_entrega': forms.NumberInput(attrs={'id': 'taxa_entrega'}),
+            'taxa_adicional': forms.NumberInput(attrs={'id': 'taxa_adicional'}),
+            'desconto': forms.NumberInput(attrs={'id': 'desconto'}),
        }
 
 
