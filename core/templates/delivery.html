@@ -1,11 +1,24 @@
 {% extends 'shared/base.html' %}
 
+{% load static %}
+
 {% block title %}
     <title>Delivery</title>
 {% endblock title %}
 
+{% block static %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="{% static 'delivery.css' %}">
+{% endblock static %}
+
 {% block body %}
-    <h1>Opções:</h1>
-    <a href="/delivery/criar-pedido/">Criar novo Delivery</a>
-    <a href="/delivery/pedidos/">Visualizar últimos pedidos</a>
+    <header>
+        <img src="{% static 'img/logoceara.png' %}">
+        <h2>DELIVERY #ceará</h2>
+    </header>
+
+    <div>
+        <a href="/delivery/criar-pedido/">NOVO PEDIDO</a>
+        <a href="/delivery/pedidos/">ÚLTIMOS PEDIDOS</a>
+    </div>
 {% endblock body %}
