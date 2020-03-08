@@ -1,10 +1,25 @@
 {% extends 'shared/base.html' %}
 
+{% load static %}
+
 {% block title %}
     <title>Página Inicial</title>
 {% endblock title %}
 
+{% block static %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+{% endblock static %}
+
 {% block body %}
-    <h1>Opções:</h1>
-    <a href="/delivery/">(Delivery)</a>
+    <header>
+        <img src="{% static 'img/logoceara.png' %}">
+        <h2>GESTOR DE PEDIDOS #ceará</h2>
+    </header>
+
+    <div>
+        <a href="/delivery/">pedidos: DELIVERY</a>
+        <a href="/balcao/">pedidos: BALCÃO</a>
+        <a href="/caixa/">fechamento: CAIXA</a>
+    </div>
 {% endblock body %}
