@@ -1,108 +1,69 @@
 body{
+    align-items: center;
     background-color: #b60b2b;
-    display: grid;
-    grid-template-areas:'banner banner' 
-                        'form btn';
-    grid-template-columns: 50vw 50vw;
-    grid-template-rows: 20vh 80vh;
-    margin: 0;
+    display: flex;
+    flex-direction: column;
     font-family: 'Roboto', 'sans-serif';
     font-weight: lighter;
+    justify-content: center;
+    margin: 0;
 }
 
 body > section:nth-child(2){
     align-items: center;
+    background-color: white;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
-    grid-area: form;
-}
-
-button[type="submit"]{
-    background-color: #b60b2b;
-    border: 0.15em solid #ffffff;
-    border-radius: 0.12em;
-    box-sizing: border-box;
-    color: #ffffff;
-    display: inline-block;
-    font-family: 'Roboto', sans-serif;
-    left: 550px;
-    margin: 0 0.3em 0.3em 0;
-    padding: 0.35em 1.2em;
-    position: absolute;
-    transition: all 0.2s;
-    text-align: center;
-    text-decoration: none;
-    top: 595px;
-    width: 300px;
-}
-
-button[type="submit"]:hover{
-    background-color: #ffffff;
-    color: #b60b2b;
-    cursor: pointer;
-}
-
-#desconto{
-    margin-left: 45px;
-}
-
-#desconto, #taxa_adicional, #taxa_entrega{
-    border: none;
-    text-align: center;
-    width: 35px;
+    padding: 10px 10px 10px 10px;
+    width: 70%;
 }
 
 form{
-    border: 1px solid white;
-    padding: 20px;
+    display: grid;
+    grid-template-areas: 'endereco endereco telefone taxa_e taxa_a desconto'
+                         'itens itens itens itens itens itens'
+                         'pagamento pagamento troco troco observacao observacao';
+    grid-template-columns: 16% 16% 16% 16% 16% 16%;
+    grid-template-rows: 10vh 25vh 15vh;
+    height: 80vh;
+    width: 100%;
 }
 
-form > div:nth-child(2), form > div:nth-child(3), form > div:nth-child(4),
-form > div:nth-child(5), form > div:nth-child(6), form > div:nth-child(7),
-form > div:nth-child(8), form > div:nth-child(9){
-    display: flex;
-}      
-
-form > div:nth-child(2), form > div:nth-child(3){
-    height: 35px;
+form > div:nth-child(2){
+    grid-area: endereco;
 }
 
-form > div:nth-child(2) > div{
-    margin-left: 10px;
-}
-
-form > div:nth-child(3) > div{
-    margin-left: 20px;
+form > div:nth-child(3){
+    grid-area: telefone;
 }
 
 form > div:nth-child(4){
-    align-items: center;
+    grid-area: itens;
 }
 
-form > div:nth-child(4) > div > select{
-    height: 40px;
+form > div:nth-child(5){
+    grid-area: taxa_e;
 }
 
-form > div:nth-child(4) > div{
-    margin-left: 15px;
+form > div:nth-child(6){
+    grid-area: taxa_a;
 }
 
-form > div:nth-child(5), form > div:nth-child(6), form > div:nth-child(7){
-    margin-top: 8px;
-    width: 180px;
+form > div:nth-child(7){
+    grid-area: desconto;
 }
 
 form > div:nth-child(8){
-    float: left;
-    width: 275px;
+    grid-area: pagamento;
 }
 
-form > div:nth-child(8) > div{
-    margin-left: 5px;
+form > div:nth-child(9){
+    grid-area: troco;
 }
 
-form > div:nth-child(8), form > div:nth-child(9), form > div:nth-child(10){
-    margin-top: 8px;
+form > div:nth-child(10){
+    grid-area: observacao;
 }
 
 header{
@@ -122,42 +83,13 @@ header > h1:nth-child(2){
     color: white;
 }
 
-#id_necessidade_troco{
-    width: 13px;
-}
-
-input{
-    background-color: #b60b2b;
-    border-bottom: 0.6px solid white;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    color: white;
-    width: 250px;
-}
-
 input[type=number]{
     -moz-appearance: textfield;
 }
 
-label{
-    color: white;
-}
-
-select{
-    background-color: #b60b2b;
-    border: 1px white solid;
-    color: white;
-}
-
-#taxa_entrega{
-    margin-left: 7px;
-}
-
 textarea{
-    background-color: #b60b2b;
-    border: 1.2px solid white;
     height: 50px;
+    width: 300px;
 }
 
 body > section:nth-child(3){
