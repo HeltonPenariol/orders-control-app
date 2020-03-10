@@ -11,7 +11,7 @@ body{
 
 body > section:nth-child(2){
     align-items: center;
-    background-color: white;
+    background-color: whitesmoke;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -22,47 +22,124 @@ body > section:nth-child(2){
 form{
     display: grid;
     grid-template-areas: 'endereco endereco telefone taxa_e taxa_a desconto'
-                         'itens itens itens itens itens itens'
+                         'pizzasg pizzasg pizzasb pizzasb esfihas esfihas'
+                         'lanches lanches sobremesas sobremesas bebidas bebidas'
                          'pagamento pagamento troco troco observacao observacao';
     grid-template-columns: 16% 16% 16% 16% 16% 16%;
-    grid-template-rows: 10vh 25vh 15vh;
+    grid-template-rows: 10vh 25vh 25vh 15vh;
     height: 80vh;
     width: 100%;
 }
 
 form > div:nth-child(2){
+    display: flex;
+    flex-direction: column;
     grid-area: endereco;
+    justify-content: center;
+}
+
+form > div:nth-child(2) div input{
+    width: 285px;
 }
 
 form > div:nth-child(3){
+    display: flex;
+    flex-direction: column;
     grid-area: telefone;
+    justify-content: center;
 }
 
 form > div:nth-child(4){
-    grid-area: itens;
+    display: flex;
+    flex-direction: column;
+    grid-area: pizzasg;
+    justify-content: center;
 }
 
 form > div:nth-child(5){
-    grid-area: taxa_e;
+    grid-area: pizzasb;
 }
 
 form > div:nth-child(6){
-    grid-area: taxa_a;
+    grid-area: esfihas;
 }
 
 form > div:nth-child(7){
-    grid-area: desconto;
+    grid-area: lanches;
 }
 
 form > div:nth-child(8){
-    grid-area: pagamento;
+    grid-area: sobremesas;
 }
 
 form > div:nth-child(9){
-    grid-area: troco;
+    grid-area: bebidas;
 }
 
 form > div:nth-child(10){
+    align-items: center;
+    display: flex;
+    grid-area: taxa_e;
+    justify-content: center;
+}
+
+form > div:nth-child(10) div input{
+    margin-left: 5px;
+    text-align: center;
+    width: 15px;
+}
+
+form > div:nth-child(11){
+    align-items: center;
+    display: flex;
+    grid-area: taxa_a;
+    justify-content: center;
+}
+
+form > div:nth-child(11) div input{
+    margin-left: 5px;
+    text-align: center;
+    width: 15px;
+}
+
+form > div:nth-child(12){
+    align-items: center;
+    display: flex;
+    grid-area: desconto;
+    justify-content: center;
+}
+
+form > div:nth-child(12) div input{
+    margin-left: 5px;
+    text-align: center;
+    width: 15px;
+}
+
+form > div:nth-child(13){
+    align-items: center;
+    display: flex;
+    grid-area: pagamento;
+    justify-content: center;
+}
+
+form > div:nth-child(13) div select{
+    margin-left: 5px;
+    width: 150px;
+}
+
+form > div:nth-child(14){
+    align-items: center;
+    display: flex;
+    grid-area: troco;
+    justify-content: center;
+}
+
+form > div:nth-child(14) div input[type="checkbox"]{
+    margin-left: 10px;
+    transform: scale(1.5);
+}
+
+form > div:nth-child(15){
     grid-area: observacao;
 }
 
@@ -85,6 +162,10 @@ header > h1:nth-child(2){
 
 input[type=number]{
     -moz-appearance: textfield;
+}
+
+label{
+    font-size: 14px;
 }
 
 textarea{

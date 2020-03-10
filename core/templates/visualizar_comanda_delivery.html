@@ -20,7 +20,22 @@
         <p><strong>Telefone: </strong><br>{{pedido.telefone|default:"Nenhum telefone informado"}}</p>
         <hr>
         <h4>ITENS DO PEDIDO</h4>
-        {% for item in comanda.itens.all %}
+        {% for item in comanda.pizzas_grande.all %}
+        <p class="itens"><strong>{{item.quantidade}}</strong> {{item.item}} (R${{item.get_valor_item}})</p>
+        {% endfor %}
+        {% for item in comanda.pizzas_broto.all %}
+        <p class="itens"><strong>{{item.quantidade}}</strong> {{item.item}} (R${{item.get_valor_item}})</p>
+        {% endfor %}
+        {% for item in comanda.esfihas.all %}
+        <p class="itens"><strong>{{item.quantidade}}</strong> {{item.item}} (R${{item.get_valor_item}})</p>
+        {% endfor %}
+        {% for item in comanda.lanches.all %}
+        <p class="itens"><strong>{{item.quantidade}}</strong> {{item.item}} (R${{item.get_valor_item}})</p>
+        {% endfor %}
+        {% for item in comanda.sobremesas.all %}
+        <p class="itens"><strong>{{item.quantidade}}</strong> {{item.item}} (R${{item.get_valor_item}})</p>
+        {% endfor %}
+        {% for item in comanda.bebidas.all %}
         <p class="itens"><strong>{{item.quantidade}}</strong> {{item.item}} (R${{item.get_valor_item}})</p>
         {% endfor %}
         <p class="observacao">Observações: {{comanda.observacao|default:"Nenhuma informada"}}</p>
