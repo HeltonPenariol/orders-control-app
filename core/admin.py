@@ -1,6 +1,11 @@
 from django.contrib import admin
-from core.models import Item, PedidoItem, Pedido
+from core.models import *
 
 admin.site.register(Item)
-admin.site.register(PedidoItem)
+admin.site.register(PizzaGrande)
+admin.site.register(PizzaBroto)
+admin.site.register(Esfiha)
+admin.site.register(Lanche)
+admin.site.register(Sobremesa)
+admin.site.register(Bebida)
 admin.site.register(Pedido)

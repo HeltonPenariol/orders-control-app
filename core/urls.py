@@ -1,6 +1,6 @@
 from django.urls import path
 from core.views import *
-from core.popups import PedidoItemPopupCRUDViewSet
+from core.popups import *
 
 urlpatterns = [
     path('', pagina_inicial, name='pagina_inicial'),
@@ -12,5 +12,10 @@ urlpatterns = [
     path('delivery/pedidos/status/<int:id>', editar_status_delivery, name='editar_status_delivery'),
     path('delivery/pedidos/deletar/<int:id>', deletar_pedido_delivery, name='deletar_pedido_delivery'),
 
-    PedidoItemPopupCRUDViewSet.urls(),
+    PizzaGrandePopupCRUDViewSet.urls(),
+    PizzaBrotoPopupCRUDViewSet.urls(),
+    EsfihaPopupCRUDViewSet.urls(),
+    LanchePopupCRUDViewSet.urls(),
+    SobremesaPopupCRUDViewSet.urls(),
+    BebidaPopupCRUDViewSet.urls(),
 ]
