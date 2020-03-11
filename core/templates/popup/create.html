@@ -27,4 +27,48 @@
             <button type="submit">Adicionar</button>
         </div>
     </form>
+
+    <style>
+        body{
+            font-family: 'Roboto', 'sans-serif';
+            height: 350px;
+        }
+
+        button{
+            background-color: #46c15c;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            height: 35px;
+            margin-top: 25px;
+            text-transform: uppercase;
+        }
+        
+        button:hover{
+            background-color: #379648;
+        }
+
+        form{
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            height: 55%;
+            justify-content: center;
+        }
+
+        form > div:nth-child(3){
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        #id_quantidade{
+            -moz-appearance: textfield;
+            text-align: center;
+            width: 35px;
+        }
+    </style>
 {% endblock %}
