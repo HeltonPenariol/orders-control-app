@@ -62,4 +62,3 @@ function removerDesconto(){
         document.getElementById("desconto").value = novo;
     }
 }
-

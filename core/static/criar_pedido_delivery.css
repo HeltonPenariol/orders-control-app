@@ -9,14 +9,65 @@ body{
     margin: 0;
 }
 
-body > section:nth-child(2){
+body > div:nth-child(2){
+    display: flex;
+    width: 100vw;
+}
+
+body > div > section:nth-child(1){
     align-items: center;
     background-color: whitesmoke;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
+    margin-left: 75px;
     padding: 10px 10px 10px 10px;
-    width: 70%;
+    width: 75%;
+}
+
+body > div > section:nth-child(2){
+    align-items: center;
+    background-color: whitesmoke;
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 110px;
+    width: 200px;
+}
+
+body > div > section:nth-child(2) > div:nth-child(1){
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+body > div > section:nth-child(2) > div:nth-child(1) > img{
+    opacity: 0.85;
+    width: 20%;
+}
+
+body > div > section:nth-child(2) > div > p{
+    margin: 10px 0px 10px 0px;
+}
+
+button[type="submit"]{
+    position: absolute;
+    background-color: #b60b2b;
+    border: none;
+    border-radius: 5px;
+    bottom: 50px;
+    color: white;
+    cursor: pointer;
+    font-weight: lighter;
+    height: 30px;
+    left: 485px;
+    width: 175px;
+}
+
+button[type="submit"]:hover{
+    background-color: #970a24;
 }
 
 form{
@@ -49,11 +100,19 @@ form > div:nth-child(3){
     justify-content: center;
 }
 
-form > div:nth-child(4){
+form > div:nth-child(n+4):nth-child(-n+9) > label{
+    text-transform: uppercase;
+}
+
+form > div:nth-child(n+4):nth-child(-n+14){
+    align-items: center;
     display: flex;
     flex-direction: column;
-    grid-area: pizzasg;
     justify-content: center;
+}
+
+form > div:nth-child(4){
+    grid-area: pizzasg;
 }
 
 form > div:nth-child(5){
@@ -77,49 +136,37 @@ form > div:nth-child(9){
 }
 
 form > div:nth-child(10){
-    align-items: center;
-    display: flex;
     grid-area: taxa_e;
-    justify-content: center;
 }
 
 form > div:nth-child(10) div input{
     margin-left: 5px;
     text-align: center;
-    width: 15px;
+    width: 25px;
 }
 
 form > div:nth-child(11){
-    align-items: center;
-    display: flex;
     grid-area: taxa_a;
-    justify-content: center;
 }
 
 form > div:nth-child(11) div input{
     margin-left: 5px;
     text-align: center;
-    width: 15px;
+    width: 25px;
 }
 
 form > div:nth-child(12){
-    align-items: center;
-    display: flex;
     grid-area: desconto;
-    justify-content: center;
 }
 
 form > div:nth-child(12) div input{
     margin-left: 5px;
     text-align: center;
-    width: 15px;
+    width: 25px;
 }
 
 form > div:nth-child(13){
-    align-items: center;
-    display: flex;
     grid-area: pagamento;
-    justify-content: center;
 }
 
 form > div:nth-child(13) div select{
@@ -128,10 +175,7 @@ form > div:nth-child(13) div select{
 }
 
 form > div:nth-child(14){
-    align-items: center;
-    display: flex;
     grid-area: troco;
-    justify-content: center;
 }
 
 form > div:nth-child(14) div input[type="checkbox"]{
@@ -151,7 +195,7 @@ header{
     justify-content: center;
 }
 
-header > img:nth-child(1){
+header > a img:nth-child(1){
     margin-right: 10px;
     width: 60px;
 }
@@ -173,8 +217,24 @@ textarea{
     width: 300px;
 }
 
-body > section:nth-child(3){
-    display: none;
+.adiciona, .subtrai, .remove{
+    border: none;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.adiciona{
+    background-color: #46c15c;
+}
+
+.subtrai{
+    background-color: #1e9fff;
+}
+
+.remove{
+    background-color: #ff2950;
 }
 
 /* layui css */

@@ -15,52 +15,65 @@
 
 {% block body %}
     <header>
-        <img src="{% static 'img/logoceara.png' %}" alt="">
+        <a href="/">
+            <img src="{% static 'img/logoceara.png' %}" alt="">
+        </a>
         <h1>DELIVERY #ceara{{request.user}}</h1>
     </header>
 
-    <section>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.media }}
-            {% for field in form %}
-            <div>
-                <label>
-                    {{field.label_tag}}
-                </label>
-                
+    <div>
+        <section>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media }}
+                {% for field in form %}
                 <div>
-                    {{field}}
+                    <label>
+                        {{field.label_tag}}
+                    </label>
+                    
+                    <div>
+                        {{field}}
+                    </div>
                 </div>
+                {% endfor %}
+                <button type="submit">FINALIZAR PEDIDO</button>
+            </form>
+        </section>
+        
+        <section>
+            <div>
+                <img src="{% static 'img/engrenagem.png' %}" alt="">
             </div>
-            {% endfor %}
-            <button type="submit">FINALIZAR PEDIDO</button>
-        </form>
-    </section>
-
-    <section>
-        <div>
-            <button onclick="maisTaxaEntrega()">adicionar taxa de entrega</button>
-            <button onclick="menosTaxaEntrega()">subtrair taxa de entrega</button>
-            <button onclick="removerTaxaEntrega()">remover taxa de entrega</button>
-        </div>
-        
-        <div>
-            <button onclick="adicionarTaxa()">adicionar taxa adicional</button>
-            <button onclick="subtrairTaxa()">subtrair taxa adicional</button>
-            <button onclick="removerTaxa()">remover taxa</button>
-        </div>
-        
-        <div>
-            <button onclick="adicionarDesconto()">adicionar desconto</button>
-            <button onclick="subtrairDesconto()">subtrair desconto</button>
-            <button onclick="removerDesconto()">remover desconto</button>
-        </div>
-    </section>
+            <div>
+                <hr>
+                <p>Taxa de entrega:</p>
+                <button class="adiciona" onclick="maisTaxaEntrega()">+</button>
+                <button class="subtrai" onclick="menosTaxaEntrega()">-</button>
+                <button class="remove" onclick="removerTaxaEntrega()">Remover</button>
+                <hr>
+            </div>
+            <div>
+                <p>Taxas adicionais:</p>
+                <button class="adiciona" onclick="adicionarTaxa()">+</button>
+                <button class="subtrai" onclick="subtrairTaxa()">-</button>
+                <button class="remove" onclick="removerTaxa()">Remover</button>
+                <hr>
+            </div>
+            
+            <div>
+                <p>Descontos:</p>
+                <button class="adiciona" onclick="adicionarDesconto()">+</button>
+                <button class="subtrai" onclick="subtrairDesconto()">-</button>
+                <button class="remove" onclick="removerDesconto()">Remover</button>
+                <hr>
+            </div>
+        </section>
+    </div>
         
         <script>
-        layui.use(['form'], function () {
-            var form = layui.form
+            layui.use(['form'], function () {
+                var form = layui.form
         });
     </script>
 {% endblock body %}
