@@ -1,36 +1,51 @@
 {% extends 'shared/base.html' %}
 
+{% load static %}
+
+{% block static %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/pedidos_delivery.css' %}">
+{% endblock static %}
+
 {% block title %}
-    <title>Delivery</title>
+    <title>#delivery - Últimos Pedidos</title>
 {% endblock title %}
 
 {% block body %}
-    <h1>Pedidos criados nas últimas 8 horas</h1>
-    {% for pedido in pedidos %}
-        <h3>Pedido: #ceara{{pedido.user}}</h3>
-        <p>Rua: {{pedido.rua}}</p>
-        <p>Telefone: {{pedido.telefone|default:"Nenhum telefone registrado"}}</p>
-        <p>Status: {{pedido.status}}</p>
-        <p>Horário de Recebimento: {{pedido.horario_recebimento}}</p>
-        <p>Horário de Atualização: {{pedido.horario_atualizacao}}</p>
-        {% for item in pedido.itens.all %}
-            <p>{{item.quantidade}} {{item.item}} ({{item.get_valor_item}})</p>
+    <header>
+        <a href="/delivery/"><img src="{% static 'img/logoceara.png' %}"></a>
+        <h1>PEDIDOS #delivery</h1>
+    </header>
+
+    <table>
+        <tr>
+            <th>Pedido</th>
+            <th>Endereço</th>
+            <th></th>
+            <th>Status</th>
+            <th>Recebimento</th>
+            <th>Atualização</th>
+            <th>Total</th>
+            <th>Pagamento</th>
+            <th>Imprimir</th>
+            <th>Editar</th>
+            <th>Deletar</th>
+        </tr>
+
+        {% for pedido in pedidos %}
+        <tr>
+            <td>#ceara{{pedido.user}}</td>
+            <td>{{pedido.rua}}</td>
+            <td><a href="/delivery/pedidos/status/{{pedido.id}}"><img src="{% static 'img/editar.png' %}" alt=""></a></td>
+            <td>{{pedido.status}}</td>
+            <td>{{pedido.horario_recebimento}}</td>
+            <td>{{pedido.horario_atualizacao}}</td>
+            <td>R$ {{pedido.get_valor_total}}</td>
+            <td>{{pedido.pagamento}}</td>
+            <td align="center"><a target="_blank" href="/delivery/pedidos/visualizar/{{pedido.id}}"><img src="{% static 'img/imprimir.png' %}" alt=""></a></td>
+            <td align="center"><a target="_blank" href="/delivery/pedidos/editar/{{pedido.id}}"><img src="{% static 'img/editar.png' %}" alt=""></a></td>
+            <td align="center"><a href="/delivery/pedidos/deletar/{{pedido.id}}"><img src="{% static 'img/deletar.png' %}" alt=""></a></td>
+        </tr>
         {% endfor %}
-        <p>Subtotal: R${{pedido.get_valor_pedido}}</p>
-        <p>Taxa de Entrega: R${{pedido.taxa_entrega}}</p>
-        <p>Taxas Adicionais: R${{pedido.taxa_adicional}}</p>
-        <p>Descontos: R${{pedido.desconto}}</p>
-        <p>Total: R${{pedido.get_valor_total}}</p>
-        <p>Forma de Pagamento: {{pedido.pagamento}}</p>
-        {% if pedido.necessidade_troco == True %}
-            <p>Troco necessário</p>
-        {% elif pedido.necessidade_troco == False %}
-            <p>Troco não necessário</p>
-        {% endif %}
-        <a href="/delivery/pedidos/visualizar/{{pedido.id}}">visualizar comanda</a>
-        <a href="/delivery/pedidos/editar/{{pedido.id}}">alterar pedido</a>
-        <a href="/delivery/pedidos/status/{{pedido.id}}">alterar status</a>
-        <a href="/delivery/pedidos/deletar/{{pedido.id}}">deletar pedido</a>
-        <hr>
-    {% endfor %}
+    </table>
 {% endblock body %}
