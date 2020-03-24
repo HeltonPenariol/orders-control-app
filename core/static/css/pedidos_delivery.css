@@ -64,18 +64,17 @@ tr > td:nth-child(2){
     width: 350px;
 }
 
-tr > td:nth-child(3) > a{
-    padding-right: 20px;
+tr > td:nth-child(3){
+    width: 80px;
 }
 
-tr > td:nth-child(3) > a > img{
+tr > td:nth-child(4) > a > img{
     width: 14px;
 }
 
 tr > td:nth-child(4){
-    width: 95px;
+    width: 50px;
 }
-
 
 tr > td:nth-child(5), tr > td:nth-child(6){
     font-size: 10px;
@@ -83,18 +82,14 @@ tr > td:nth-child(5), tr > td:nth-child(6){
 }
 
 tr > td:nth-child(7){
-    width: 90px;
-}
-
-tr > td:nth-child(7){
     width: 120px;
 }
 
-tr > td:nth-child(9), tr > td:nth-child(10), tr > td:nth-child(11){
+tr > td:nth-child(10), tr > td:nth-child(11), tr > td:nth-child(12){
     width: 80px;
 }
 
-tr > th:nth-child(9), tr > th:nth-child(10), tr > th:nth-child(11){
+tr > th:nth-child(10), tr > th:nth-child(11), tr > th:nth-child(12){
     font-size: 11px;
     font-weight: lighter;
     text-align: center;

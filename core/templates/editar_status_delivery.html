@@ -1,23 +1,41 @@
 {% extends 'shared/base.html' %}
 
+{% load static %}
+
+{% block static %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/editar_status_delivery.css' %}">
+{% endblock static %}
+
 {% block title %}
-    <title>Delivery</title>
+    <title>#delivery - Alteração de Status</title>
 {% endblock title %}
 
 {% block body %}
-    <form method="post">
-        {% csrf_token %}
-        {% for field in form %}
-        <div>
-            <label>
-                {{field.label_tag}}
-            </label>
+    <header>
+        <a href="/delivery/pedidos/">
+            <img src="{% static 'img/logoceara.png' %}" alt="">
+        </a>
+        <h1>DELIVERY #ceara</h1>
+        <h2>Alteração de Status - pedido: #ceara{{pedido.user}}</h2>
+        <h2>{{pedido.rua}}</h2>
+    </header>
 
+    <section>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
             <div>
-                {{field}}
+                <label>
+                    {{field.label_tag}}
+                </label>
+                
+                <div>
+                    {{field}}
+                </div>
             </div>
-        </div>
-    {% endfor %}
-    <button type="submit">Finalizar</button>
-    </form>
+            {% endfor %}
+            <button type="submit">Concluir</button>
+        </form>
+    </section>
 {% endblock body %}

@@ -124,7 +124,7 @@ class Pedido(models.Model):
     )
 
     PAGAMENTOS = (
-        ('Maquininha', 'Maquininha'),
+        ('Cartão', 'Cartão'),
         ('Dinheiro', 'Dinheiro'),
     )
 

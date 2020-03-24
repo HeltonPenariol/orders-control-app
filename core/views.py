@@ -85,7 +85,9 @@ class PedidoDeliveryUpdateView(UpdateView):
 def editar_status_delivery(request, id):
     pedido = Pedido.objects.get(pk=id)
     status_pedido = StatusPedidoForm(request.POST or None, instance=pedido)
-    args = {'form': status_pedido}
+    args = {'form': status_pedido,
+            'pedido': pedido,
+    }
 
     if status_pedido.is_valid():
         status_pedido.save()
