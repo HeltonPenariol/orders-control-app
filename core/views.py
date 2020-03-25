@@ -29,13 +29,13 @@ def pagina_delivery(request):
     login(request, novo_usuario)
 
     args = {'usuario': novo_usuario}
-    template = 'delivery.html'
+    template = 'delivery/delivery.html'
     return render(request, template, args)
 
 class PedidoDeliveryCreateView(CreateView):
     raise_exception = True
     form_class = PedidoForm
-    template_name = 'criar_pedido_delivery.html'
+    template_name = 'delivery/criar_pedido_delivery.html'
     success_url = reverse_lazy('pagina_delivery')
 
     def form_valid(self, form):
@@ -55,19 +55,19 @@ def listar_pedidos_delivery(request):
     tempo_limite = tempo_atual - timedelta(hours=8)
     pedidos_delivery = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()
     args = {'pedidos': pedidos_delivery}
-    template = 'pedidos_delivery.html'
+    template = 'delivery/pedidos_delivery.html'
     return render(request, template, args)
 
 def visualizar_comanda_delivery(request, id):
     comanda = Pedido.objects.get(pk=id)
     args = {'comanda':comanda}
-    template = 'visualizar_comanda_delivery.html'
+    template = 'delivery/visualizar_comanda_delivery.html'
     return render(request, template, args)
 
 class PedidoDeliveryUpdateView(UpdateView):
     model = Pedido
     form_class = PedidoForm
-    template_name = 'editar_pedido_delivery.html'
+    template_name = 'delivery/editar_pedido_delivery.html'
     success_url = reverse_lazy('pagina_delivery')
 
     def form_valid(self, form):
@@ -93,7 +93,7 @@ def editar_status_delivery(request, id):
         status_pedido.save()
         return redirect('/delivery/pedidos/')
 
-    template = 'editar_status_delivery.html'
+    template = 'delivery/editar_status_delivery.html'
     return render(request, template, args)
 
 def deletar_pedido_delivery(request, id):

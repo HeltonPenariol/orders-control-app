@@ -6,11 +6,11 @@
     <script src="{% static 'layui/layui.js' %}"></script>
     <script defer src="{% static 'js/inputconfig.js' %}"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/criar_pedido_delivery.css' %}">
+    <link rel="stylesheet" href="{% static 'css/delivery/criar_pedido_delivery.css' %}">
 {% endblock static %}
 
 {% block title %}
-    <title>Delivery</title>
+    <title>#delivery - Novo Pedido</title>
 {% endblock title %}
 
 {% block body %}
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 {% endfor %}
-                <button type="submit">EDITAR PEDIDO</button>
+                <button type="submit">FINALIZAR PEDIDO</button>
             </form>
         </section>
         
@@ -70,10 +70,10 @@
             </div>
         </section>
     </div>
-
-    <script>
-        layui.use(['form'], function () {
-            var form = layui.form
+        
+        <script>
+            layui.use(['form'], function () {
+                var form = layui.form
         });
     </script>
 {% endblock body %}
