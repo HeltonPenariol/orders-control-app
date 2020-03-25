@@ -1,0 +1,26 @@
+{% extends 'shared/base.html' %}
+
+{% load static %}
+
+{% block title %}
+    <title>#ceara - Balcão</title>
+{% endblock title %}
+
+{% block static %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="{% static 'css/balcao/balcao.css' %}">
+{% endblock static %}
+
+{% block body %}
+    <header>
+        <a href="/">
+            <img src="{% static 'img/logoceara.png' %}">
+        </a>
+        <h2>BALCÃO #ceará</h2>
+    </header>
+
+    <div>
+        <a href="/balcao/criar-pedido/">NOVO PEDIDO</a>
+        <a href="/balcao/pedidos/">ÚLTIMOS PEDIDOS</a>
+    </div>
+{% endblock body %}

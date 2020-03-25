@@ -213,7 +213,7 @@ class PedidoBalcao(models.Model):
 
     STATUS = (
         ('Em preparo', 'Em preparo'),
-        ('Em entrega', 'Em entrega'),
+        ('Pronto', 'Pronto'),
         ('Concluído', 'Concluído'),
     )
 
@@ -237,7 +237,7 @@ class PedidoBalcao(models.Model):
     sobremesas = models.ManyToManyField(Sobremesa, blank=True)
     bebidas = models.ManyToManyField(Bebida, blank=True)
     desconto = models.DecimalField(verbose_name='Descontos', max_digits=3, decimal_places=2, default=0)
-    pagamento_conclusao = models.CharField(verbose_name='Conclusão do Pagamento', max_length=255, choices=CONCLUSOES_PAGAMENTO, blank=True)
+    pagamento_conclusao = models.CharField(verbose_name='Pagamento', max_length=255, choices=CONCLUSOES_PAGAMENTO, blank=True)
     horario_recebimento = models.DateTimeField(verbose_name='Horário de Recebimento', auto_now_add=True)
     horario_atualizacao = models.DateTimeField(verbose_name='Horário de Atualização', auto_now=True)
     status = models.CharField(verbose_name='Status do Pedido', max_length=255, choices=STATUS, default='Em preparo')

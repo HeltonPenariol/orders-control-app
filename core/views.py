@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.views.generic import CreateView, UpdateView
 from core.models import *
-from core.forms import PedidoForm, StatusPedidoForm
+from core.forms import *
 from datetime import datetime, timedelta
 from random import choice
 
@@ -100,3 +100,34 @@ def deletar_pedido_delivery(request, id):
     pedido = Pedido.objects.get(pk=id)
     pedido.delete()
     return redirect('/delivery/pedidos/')
+
+def pagina_balcao(request):
+    novo_username = gerar_numeros(4)
+    novo_usuario = User.objects.create_user(novo_username)
+    novo_usuario.set_password('ceara')
+    novo_usuario.save()
+
+    novo_usuario = authenticate(username=novo_usuario.username, password='ceara')
+    login(request, novo_usuario)
+
+    args = {'usuario': novo_usuario}
+    template = 'balcao/balcao.html'
+    return render(request, template, args)
+
+class PedidoBalcaoCreateView(CreateView):
+    raise_exception = True
+    form_class = PedidoBalcaoForm
+    template_name = 'balcao/criar_pedido_balcao.html'
+    success_url = reverse_lazy('pagina_balcao')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        form.save_m2m()
+        return redirect('/balcao/pedidos/')
+
+    def get_form_kwargs(self):
+        kwargs = super(PedidoBalcaoCreateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs

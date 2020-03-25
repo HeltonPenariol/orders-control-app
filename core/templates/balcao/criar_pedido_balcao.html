@@ -1,0 +1,50 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block static %}
+    <script src="{% static 'jquery/jquery-2.1.3.min.js' %}"></script>
+    <script src="{% static 'layui/layui.js' %}"></script>
+    <script defer src="{% static 'js/inputconfig.js' %}"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/balcao/criar_pedido_balcao.css' %}">
+{% endblock static %}
+
+{% block title %}
+    <title>#balcao - Novo Pedido</title>
+{% endblock title %}
+
+{% block body %}
+    <header>
+        <a href="/balcao/">
+            <img src="{% static 'img/logoceara.png' %}" alt="">
+        </a>
+        <h1>BALCÃO #ceara{{request.user}}</h1>
+    </header>
+
+    <div>
+        <section>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media }}
+                {% for field in form %}
+                <div>
+                    <label>
+                        {{field.label_tag}}
+                    </label>
+                    
+                    <div>
+                        {{field}}
+                    </div>
+                </div>
+                {% endfor %}
+                <button type="submit">FINALIZAR PEDIDO</button>
+            </form>
+        </section>
+    </div>
+        
+    <script>
+        layui.use(['form'], function () {
+            var form = layui.form
+        });
+    </script>
+{% endblock body %}

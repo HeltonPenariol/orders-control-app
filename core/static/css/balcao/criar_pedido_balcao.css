@@ -1,0 +1,266 @@
+body{
+    align-items: center;
+    background-color: #b60b2b;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Roboto', 'sans-serif';
+    font-weight: lighter;
+    justify-content: center;
+    margin: 0;
+}
+
+body > div:nth-child(2){
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+}
+
+body > div > section:nth-child(1){
+    align-items: center;
+    background-color: whitesmoke;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 10px 10px 10px;
+    width: 75%;
+}
+
+button[type="submit"]{
+    position: absolute;
+    background-color: #b60b2b;
+    border: none;
+    border-radius: 5px;
+    bottom: 50px;
+    color: white;
+    cursor: pointer;
+    font-weight: lighter;
+    height: 30px;
+    left: 580px;
+    width: 175px;
+}
+
+button[type="submit"]:hover{
+    background-color: #970a24;
+}
+
+form{
+    display: grid;
+    grid-template-areas: 'pizzasg pizzasg pizzasb pizzasb esfihas esfihas'
+                         'lanches lanches sobremesa sobremesa bebidas bebidas'
+                         'id id pagamento desconto observacao observacao';
+    grid-template-columns: 16% 16% 16% 16% 16% 16%;
+    grid-template-rows: 25vh 25vh 15vh;
+    height: 80vh;
+    width: 100%;
+}
+
+form > div:nth-child(n+3):nth-child(-n+8) > label{
+    text-transform: uppercase;
+}
+
+form > div:nth-child(2){
+    grid-area: id;
+}
+
+form > div:nth-child(3){
+    grid-area: pizzasg;
+}
+
+form > div:nth-child(4){
+    grid-area: pizzasb;
+}
+
+form > div:nth-child(5){
+    grid-area: esfihas;
+}
+
+form > div:nth-child(6){
+    grid-area: lanches;
+}
+
+form > div:nth-child(7){
+    grid-area: sobremesa;
+}
+
+form > div:nth-child(8){
+    grid-area: bebidas;
+}
+
+form > div:nth-child(9){
+    grid-area: pagamento;
+}
+
+form > div:nth-child(10){
+    grid-area: desconto;
+}
+
+form > div:nth-child(11){
+    grid-area: observacao;
+}
+
+form > div{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+header{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    grid-area: banner;
+    justify-content: center;
+}
+
+header > a img:nth-child(1){
+    margin-right: 10px;
+    width: 60px;
+}
+
+header > h1:nth-child(2){
+    color: white;
+}
+
+input[type="number"]{
+    width: 50px;
+}
+
+label{
+    font-size: 14px;
+}
+
+textarea{
+    height: 50px;
+    width: 300px;
+}
+
+.adiciona, .subtrai, .remove{
+    border: none;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.adiciona{
+    background-color: #46c15c;
+}
+
+.subtrai{
+    background-color: #1e9fff;
+}
+
+.remove{
+    background-color: #ff2950;
+}
+
+/* layui css */
+
+.layui-btn {
+    vertical-align: middle
+}
+
+.layui-btn {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none
+}
+
+.layui-btn {
+    display: inline-block;
+    height: 38px;
+    line-height: 38px;
+    padding: 0 18px;
+    background-color: #46C15C;
+    color: #fff;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 14px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer
+}
+
+.layui-btn:hover {
+    opacity: .8;
+    filter: alpha(opacity=80);
+    color: #fff
+}
+
+.layui-btn:active {
+    opacity: 1;
+    filter: alpha(opacity=100)
+}
+
+.layui-btn-radius {
+    border-radius: 100px
+}
+
+.layui-btn .layui-icon {
+    margin-right: 3px;
+    font-size: 18px;
+    vertical-align: bottom;
+    vertical-align: middle \9
+}
+
+.layui-btn-primary {
+    border: 1px solid #C9C9C9;
+    background-color: #fff;
+    color: #555
+}
+
+.layui-btn-primary:hover {
+    border-color: #009688;
+    color: #333
+}
+
+.layui-btn-normal {
+    background-color: #1E9FFF;
+}
+
+.layui-btn-warm {
+    background-color: #FFB800;
+}
+
+.layui-btn-danger {
+    background-color: #FF2950;
+}
+
+.layui-btn-disabled, .layui-btn-disabled:active, .layui-btn-disabled:hover {
+    background-color: #FBFBFB;
+    color: #C9C9C9;
+    cursor: not-allowed;
+    opacity: 1
+}
+
+.layui-btn-big {
+    height: 44px;
+    line-height: 44px;
+    padding: 0 25px;
+    font-size: 16px
+}
+
+.layui-btn-small {
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    font-size: 12px
+}
+
+.layui-btn-small i {
+    font-size: 16px !important
+}
+
+.layui-btn-mini {
+    height: 22px;
+    line-height: 22px;
+    padding: 0 5px;
+    font-size: 12px
+}
+
+.layui-btn-mini i {
+    font-size: 14px !important
+}
