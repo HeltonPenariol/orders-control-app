@@ -85,8 +85,9 @@ class PedidoDeliveryUpdateView(UpdateView):
 def editar_status_delivery(request, id):
     pedido = Pedido.objects.get(pk=id)
     status_pedido = StatusPedidoForm(request.POST or None, instance=pedido)
-    args = {'form': status_pedido,
-            'pedido': pedido,
+    args = {
+        'form': status_pedido,
+        'pedido': pedido,
     }
 
     if status_pedido.is_valid():
@@ -138,4 +139,19 @@ def listar_pedidos_balcao(request):
     pedidos_balcao= PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()
     args = {'pedidos': pedidos_balcao}
     template = 'balcao/pedidos_balcao.html'
+    return render(request, template, args)
+
+def editar_status_balcao(request, id):
+    pedido = PedidoBalcao.objects.get(pk=id)
+    status_pedido = StatusPedidoBalcaoForm(request.POST or None, instance=pedido)
+    args = {
+        'form': status_pedido,
+        'pedido': pedido,
+    }
+
+    if status_pedido.is_valid():
+        status_pedido.save()
+        return redirect('/balcao/pedidos/')
+
+    template = 'balcao/editar_status_balcao.html'
     return render(request, template, args)
