@@ -173,3 +173,8 @@ def editar_status_balcao(request, id):
 
     template = 'balcao/editar_status_balcao.html'
     return render(request, template, args)
+
+def deletar_pedido_balcao(request, id):
+    pedido = PedidoBalcao.objects.get(pk=id)
+    pedido.delete()
+    return redirect('/balcao/pedidos/')
