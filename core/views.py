@@ -141,6 +141,12 @@ def listar_pedidos_balcao(request):
     template = 'balcao/pedidos_balcao.html'
     return render(request, template, args)
 
+def visualizar_comanda_balcao(request, id):
+    comanda = PedidoBalcao.objects.get(pk=id)
+    args = {'comanda':comanda}
+    template = 'balcao/visualizar_comanda_balcao.html'
+    return render(request, template, args)
+
 class PedidoBalcaoUpdateView(UpdateView):
     model = PedidoBalcao
     form_class = PedidoBalcaoForm

@@ -1,0 +1,64 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    width: 270px;
+}
+
+body div > h3:nth-child(1){
+    margin: 5px 0 0 0;
+    text-align: center;
+}
+
+body div > h4:nth-child(2){
+    margin: 5px 0 3px 0;
+}
+
+body div > h3:nth-child(1), body > h4:nth-child(2){
+    text-align: center;
+}
+
+body div > p:nth-child(3){
+    font-size: 11px;
+    margin: 1px 0 1px 0;
+    text-align: center;
+}
+
+body div > p:nth-child(4){
+    font-size: 13px;
+    margin: 3px 0 1px 0;
+}
+
+body div > h4:nth-child(6){
+    font-size: 14px;
+    margin: 5px 0 5px 0;
+    text-align: center;
+}
+
+.itens{
+    font-size: 13px;
+}
+
+.observacao{
+    font-size: 11px;
+}
+
+.valores{
+    display: flex;
+    height: 20px;
+    justify-content: space-between;
+}
+
+.valores > p{
+    font-size: 12px;
+}
+
+.pagamento{
+    font-size: 12px;
+    margin-top: 15px;
+    margin-bottom: 4px;
+}
+
+.rodape{
+    font-size: 10px;
+    text-align: center;
+}
