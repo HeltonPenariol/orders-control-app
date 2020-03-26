@@ -61,10 +61,10 @@
             <p>R${{comanda.get_valor_total}}</p>
         </div>
         <p class="pagamento">Forma de Pagamento: <strong>{{comanda.pagamento}}</strong></p>
-        {% if comanda.necessidade_troco == True %}
-        <p class="troco">*Troco necessário*</p>
-        {% elif comanda.necessidade_troco == False %}
+        {% if comanda.necessidade_troco == 0 %}
         <p class="troco">*Troco não necessário*</p>
+        {% else %}
+        <p class="troco"><strong>*Troco p/ R${{comanda.necessidade_troco}}* (Levar {{comanda.get_valor_troco}})</strong></p>
         {% endif %}
         <hr>
         <p class="rodape">Pizzaria e Hamburgueria do Ceará</p>

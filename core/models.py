@@ -148,7 +148,7 @@ class Pedido(models.Model):
     desconto = models.DecimalField(verbose_name='Descontos', max_digits=3, decimal_places=2, default=0)
     pagamento = models.CharField(verbose_name='Forma de Pagamento', max_length=255, choices=PAGAMENTOS)
     pagamento_conclusao = models.CharField(verbose_name='Conclusão do Pagamento', max_length=255, choices=CONCLUSOES_PAGAMENTO, blank=True)
-    necessidade_troco = models.BooleanField(verbose_name='Necessita de Troco?', default=False)
+    necessidade_troco = models.PositiveIntegerField(verbose_name='Necessita de Troco?', default=0)
     horario_recebimento = models.DateTimeField(verbose_name='Horário de Recebimento', auto_now_add=True)
     horario_atualizacao = models.DateTimeField(verbose_name='Horário de Atualização', auto_now=True)
     status = models.CharField(verbose_name='Status do Pedido', max_length=255, choices=STATUS, default='Em preparo')
@@ -181,30 +181,18 @@ class Pedido(models.Model):
         return total
 
     def get_valor_total(self):
-        total = 0
+        total = self.get_valor_pedido()
         total += self.taxa_entrega
         total += self.taxa_adicional
         total -= self.desconto
 
-        for pizza_grande in self.pizzas_grande.all():
-            total += pizza_grande.get_valor_item()
-        
-        for pizza_broto in self.pizzas_broto.all():
-            total += pizza_broto.get_valor_item()
-
-        for esfiha in self.esfihas.all():
-            total += esfiha.get_valor_item()
-        
-        for lanche in self.lanches.all():
-            total += lanche.get_valor_item()
-        
-        for sobremesa in self.sobremesas.all():
-            total += sobremesa.get_valor_item()
-    
-        for bebida in self.bebidas.all():
-            total += bebida.get_valor_item()
-
         return total
+    
+    def get_valor_troco(self):
+        total = self.get_valor_total()
+        troco = self.necessidade_troco
+        return troco - total
+
 
 class PedidoBalcao(models.Model):
     class Meta:
