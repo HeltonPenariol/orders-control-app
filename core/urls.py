@@ -15,7 +15,7 @@ urlpatterns = [
     path('balcao/criar-pedido/', PedidoBalcaoCreateView.as_view(), name='criar_pedido_balcao'),
     path('balcao/pedidos/', listar_pedidos_balcao, name='listar_pedidos_balcao'),
     # path('balcao/pedidos/visualizar/<int:id>', visualizar_comanda_balcao, name='visualizar_comanda_balcao'),
-    # path('balcao/pedidos/editar/<int:id>', PedidoBalcaoUpdateView.as_view(), name='editar_pedido_balcao'),
+    path('balcao/pedidos/editar/<int:pk>', PedidoBalcaoUpdateView.as_view(), name='editar_pedido_balcao'),
     path('balcao/pedidos/status/<int:id>', editar_status_balcao, name='editar_status_balcao'),
 
     PizzaGrandePopupCRUDViewSet.urls(),

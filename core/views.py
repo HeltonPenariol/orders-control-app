@@ -141,6 +141,24 @@ def listar_pedidos_balcao(request):
     template = 'balcao/pedidos_balcao.html'
     return render(request, template, args)
 
+class PedidoBalcaoUpdateView(UpdateView):
+    model = PedidoBalcao
+    form_class = PedidoBalcaoForm
+    template_name = 'balcao/editar_pedido_balcao.html'
+    success_url = reverse_lazy('pagina_balcao')
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        form.save_m2m()
+        return redirect('/balcao/pedidos/')
+
+    def get_form_kwargs(self):
+        kwargs = super(PedidoBalcaoUpdateView, self).get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
 def editar_status_balcao(request, id):
     pedido = PedidoBalcao.objects.get(pk=id)
     status_pedido = StatusPedidoBalcaoForm(request.POST or None, instance=pedido)
