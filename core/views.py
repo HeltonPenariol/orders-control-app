@@ -131,3 +131,11 @@ class PedidoBalcaoCreateView(CreateView):
         kwargs = super(PedidoBalcaoCreateView, self).get_form_kwargs()
         kwargs['request'] = self.request
         return kwargs
+
+def listar_pedidos_balcao(request):
+    tempo_atual = datetime.now()
+    tempo_limite = tempo_atual - timedelta(hours=8)
+    pedidos_balcao= PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()
+    args = {'pedidos': pedidos_balcao}
+    template = 'balcao/pedidos_balcao.html'
+    return render(request, template, args)

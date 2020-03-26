@@ -271,8 +271,6 @@ class PedidoBalcao(models.Model):
 
     def get_valor_total(self):
         total = 0
-        total += self.taxa_entrega
-        total += self.taxa_adicional
         total -= self.desconto
 
         for pizza_grande in self.pizzas_grande.all():
