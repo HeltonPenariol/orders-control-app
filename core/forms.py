@@ -2,6 +2,11 @@ from django import forms
 from core.models import *
 from core.popups import *
 
+class ClienteForm(forms.ModelForm):
+    class Meta:
+        model = Cliente
+        fields = '__all__'
+
 class PedidoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         request = kwargs.pop('request')
@@ -40,7 +45,6 @@ class PedidoForm(forms.ModelForm):
             'taxa_adicional': forms.NumberInput(attrs={'id': 'taxa_adicional'}),
             'desconto': forms.NumberInput(attrs={'id': 'desconto'}),
        }
-
 
 class StatusPedidoForm(forms.ModelForm):
     class Meta:

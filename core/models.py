@@ -39,8 +39,8 @@ class PizzaGrande(models.Model):
 
 class PizzaBroto(models.Model):
     class Meta:
-        verbose_name = 'Pizzas do Pedido'
-        verbose_name_plural = 'Pizzas do Pedido'
+        verbose_name = 'Pizzas Broto do Pedido'
+        verbose_name_plural = 'Pizzas Broto do Pedido'
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.DO_NOTHING)
@@ -99,8 +99,8 @@ class Sobremesa(models.Model):
 
 class Bebida(models.Model):
     class Meta:
-        verbose_name = 'Sobremesas do Pedido'
-        verbose_name_plural = 'Sobremesas do Pedido'
+        verbose_name = 'Bebidas do Pedido'
+        verbose_name_plural = 'Bebidas do Pedido'
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     item = models.ForeignKey(Item, on_delete=models.DO_NOTHING)
@@ -155,7 +155,7 @@ class Pedido(models.Model):
     observacao = models.TextField(verbose_name='Observações do Pedido', blank=True)
 
     def __str__(self):
-        return f'PEDIDO: #{self.user} - {self.rua} - {self.horario_recebimento}'
+        return f'{self.horario_recebimento} PEDIDO: #{self.user} - {self.rua} (Telefone: {self.telefone})'
 
     def get_valor_pedido(self):
         total = 0
@@ -280,3 +280,15 @@ class PedidoBalcao(models.Model):
             total += bebida.get_valor_item()
 
         return total
+
+class Cliente(models.Model):
+    class Meta:
+        verbose_name = 'Cliente'
+        verbose_name_plural = 'Clientes'
+
+    nome = models.CharField(verbose_name="Nome do Cliente", max_length=255, blank=True)
+    rua = models.CharField(verbose_name="Endereço", max_length=255)
+    telefone = models.CharField(verbose_name="Telefone", max_length=255)
+
+    def __str__(self):
+        return f'{self.nome} - {self.rua} - {self.telefone}'

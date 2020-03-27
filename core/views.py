@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.views.generic import CreateView, UpdateView
@@ -101,6 +101,26 @@ def deletar_pedido_delivery(request, id):
     pedido = Pedido.objects.get(pk=id)
     pedido.delete()
     return redirect('/delivery/pedidos/')
+
+def cadastrar_cliente(request, id):
+    instance = get_object_or_404(Pedido, id=id)
+    form = ClienteForm(instance=instance)
+
+    args = {
+        'form': form,
+        'instance': instance
+    }
+
+    template = 'delivery/cadastrar_cliente.html'
+
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/delivery/pedidos/')
+
+    return render(request, template, args)
 
 def pagina_balcao(request):
     novo_username = gerar_numeros(4)

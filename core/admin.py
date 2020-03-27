@@ -1,6 +1,7 @@
 from django.contrib import admin
 from core.models import *
 
+admin.site.register(Cliente)
 admin.site.register(Item)
 admin.site.register(PizzaGrande)
 admin.site.register(PizzaBroto)
