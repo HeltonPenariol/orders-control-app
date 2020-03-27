@@ -1,0 +1,39 @@
+{% extends 'shared/base.html' %}
+
+{% load static %}
+
+{% block static %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/delivery/clientes.css' %}">
+{% endblock static %}
+
+{% block title %}
+    <title>#ceara - Clientes</title>
+{% endblock title %}
+
+{% block body %}
+    <header>
+        <a href="/delivery/"><img src="{% static 'img/logoceara.png' %}"></a>
+        <h1>CLIENTES</h1>
+    </header>
+
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Endereço</th>
+            <th>Telefone</th>
+            <th>Editar</th>
+            <th>Excluir</th>
+        </tr>
+
+        {% for cliente in clientes %}
+        <tr>
+            <td>{{cliente.nome|default:"Indefinido"}}</td>
+            <td>{{cliente.rua}}</td>
+            <td>{{cliente.telefone}}</td>
+            <td>a</td>
+            <td>a</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock body %}

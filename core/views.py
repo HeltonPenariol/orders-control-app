@@ -122,6 +122,14 @@ def cadastrar_cliente(request, id):
 
     return render(request, template, args)
 
+def listar_clientes(request):
+    clientes = Cliente.objects.all()
+    args = {
+        'clientes': clientes
+    }
+    template = 'delivery/clientes.html'
+    return render(request, template, args)
+
 def pagina_balcao(request):
     novo_username = gerar_numeros(4)
     novo_usuario = User.objects.create_user(novo_username)
