@@ -24,6 +24,10 @@ header h1{
     color: white;
 }
 
+.payment-status{
+    border-radius: 20px;
+}
+
 table{
     background-color: white;
     border: 10px solid white;
@@ -85,11 +89,11 @@ tr > td:nth-child(7){
     width: 120px;
 }
 
-tr > td:nth-child(10), tr > td:nth-child(11), tr > td:nth-child(12){
+tr > td:nth-child(10), tr > td:nth-child(11), tr > td:nth-child(12), tr > td:nth-child(13){
     width: 80px;
 }
 
-tr > th:nth-child(10), tr > th:nth-child(11), tr > th:nth-child(12){
+tr > th:nth-child(10), tr > th:nth-child(11), tr > th:nth-child(12), tr > th:nth-child(13){
     font-size: 11px;
     font-weight: lighter;
     text-align: center;

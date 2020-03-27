@@ -291,4 +291,4 @@ class Cliente(models.Model):
     telefone = models.CharField(verbose_name="Telefone", max_length=255)
 
     def __str__(self):
-        return f'{self.nome} - {self.rua} - {self.telefone}'
+        return f'{self.rua} - {self.telefone} {self.nome}'

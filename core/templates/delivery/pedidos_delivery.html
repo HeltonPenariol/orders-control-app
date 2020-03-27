@@ -32,6 +32,7 @@
             <th>Imprimir</th>
             <th>Editar</th>
             <th>Deletar</th>
+            <th>Cadastrar</th>
         </tr>
 
         {% for pedido in pedidos %}
@@ -45,13 +46,14 @@
             <td>R$ {{pedido.get_valor_total}}</td>
             <td>{{pedido.pagamento}}</td>
             {% if pedido.pagamento_conclusao %}
-            <td><img src="{% static 'img/green.jpg' %}" alt=""></td>
+            <td><img class="payment-status" src="{% static 'img/green.jpg' %}" alt=""></td>
             {% else %}
-            <td><img src="{% static 'img/red.jpg' %}" alt=""></td>
+            <td><img class="payment-status" src="{% static 'img/red.jpg' %}" alt=""></td>
             {% endif %}
             <td align="center"><a target="_blank" href="/delivery/pedidos/visualizar/{{pedido.id}}"><img src="{% static 'img/imprimir.png' %}" alt=""></a></td>
             <td align="center"><a target="_blank" href="/delivery/pedidos/editar/{{pedido.id}}"><img src="{% static 'img/editar.png' %}" alt=""></a></td>
             <td align="center"><a href="/delivery/pedidos/deletar/{{pedido.id}}"><img src="{% static 'img/deletar.png' %}" alt=""></a></td>
+            <td align="center"><a target="_blank" href="/delivery/clientes/cadastrar/{{pedido.id}}"><img src="{% static 'img/adicionar.png' %}" alt=""></a></td>
         </tr>
         {% endfor %}
     </table>
