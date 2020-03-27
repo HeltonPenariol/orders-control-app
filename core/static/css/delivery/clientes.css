@@ -41,6 +41,10 @@ td{
     padding: 0;
 }
 
+td > a > img{
+    width: 16px;
+}
+
 th{
     height: 50px;
     font-size: 15px;
@@ -52,14 +56,22 @@ tr{
     text-align: left;
 }
 
+tr > th:nth-child(4), tr > th:nth-child(5){
+    text-align: center;
+}
+
 tr > td:nth-child(1){
-    width: 85px;
+    width: 120px;
 }
 
 tr > td:nth-child(2){
-    width: 350px;
+    width: 450px;
 }
 
 tr > td:nth-child(3){
-    width: 80px;
+    width: 200px;
+}
+
+tr > td:nth-child(4), tr > td:nth-child(5){
+    width: 100px;
 }

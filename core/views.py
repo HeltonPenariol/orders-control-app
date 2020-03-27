@@ -124,11 +124,33 @@ def cadastrar_cliente(request, id):
 
 def listar_clientes(request):
     clientes = Cliente.objects.all()
+    numero_clientes = len(clientes)
     args = {
-        'clientes': clientes
+        'clientes': clientes,
+        'numero_clientes': numero_clientes
     }
     template = 'delivery/clientes.html'
     return render(request, template, args)
+
+def editar_cliente(request, id):
+    cliente = Cliente.objects.get(pk=id)
+    form = ClienteForm(request.POST or None, instance=cliente)
+    args = {
+        'cliente': cliente,
+        'form': form,
+    }
+
+    if form.is_valid():
+        form.save()
+        return redirect('/delivery/clientes/')
+
+    template = 'delivery/editar_cliente.html'
+    return render(request, template, args)
+
+def remover_cliente(request, id):
+    cliente = Cliente.objects.get(pk=id)
+    cliente.delete()
+    return redirect('/delivery/clientes/')
 
 def pagina_balcao(request):
     novo_username = gerar_numeros(4)
