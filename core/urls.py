@@ -22,6 +22,7 @@ urlpatterns = [
     path('balcao/pedidos/editar/<int:pk>', PedidoBalcaoUpdateView.as_view(), name='editar_pedido_balcao'),
     path('balcao/pedidos/status/<int:id>', editar_status_balcao, name='editar_status_balcao'),
     path('balcao/pedidos/deletar/<int:id>', deletar_pedido_balcao, name='deletar_pedido_balcao'),
+    path('caixa/', fechar_caixa, name='fechar_caixa'),
 
     PizzaGrandePopupCRUDViewSet.urls(),
     PizzaBrotoPopupCRUDViewSet.urls(),

@@ -1,0 +1,22 @@
+{% extends 'shared/base.html' %}
+
+{% block title %}
+    <title>Caixa - Fechamento Total</title>
+{% endblock title %}
+
+{% block body %}
+    <p>Quantidades de pedido Delivery: {{pedidos_delivery}}</p>
+    <p>Quantidade de pedidos Balcão: {{pedidos_balcao}}</p>
+    <p>Pagamentos em dinheiro DELIVERY R${{dinheiro_delivery}}</p>
+    <p>Pagamentos em dinheiro BALCAO R${{dinheiro_balcao}}</p>
+    <p>Pagamentos em débito DELIVERY R${{debito_delivery}}</p>
+    <p>Pagamentos em débito BALCAO R${{debito_balcao}}</p>
+    <p>Pagamentos em crédito DELIVERY R${{credito_delivery}}</p>
+    <p>Pagamentos em crédito BALCÃO R${{credito_balcao}}</p>
+    <hr>
+    <p>Pagamentos Dinheiro TOTAL R${{total_dinheiro}}</p>
+    <p>Pagamentos Débito TOTAL R${{total_debito}}</p>
+    <p>Pagamentos Crédito TOTAL R${{total_credito}}</p>
+    <hr>
+    <p>FECHAMENTO TOTAL: R${{total}}</p>
+{% endblock body %}

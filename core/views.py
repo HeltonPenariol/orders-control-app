@@ -2,10 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.views.generic import CreateView, UpdateView
+
 from core.models import *
 from core.forms import *
+
 from datetime import datetime, timedelta
 from random import choice
+
 
 def pagina_inicial(request):
     template = 'index.html'
@@ -18,6 +21,9 @@ def gerar_numeros(tamanho):
     for numero in range(tamanho):
         numero_pedido += choice(numeros)
     return numero_pedido
+
+
+# Páginas - Delivery 
 
 def pagina_delivery(request):
     novo_username = gerar_numeros(4)
@@ -152,6 +158,9 @@ def remover_cliente(request, id):
     cliente.delete()
     return redirect('/delivery/clientes/')
 
+
+# Páginas - Balcão
+
 def pagina_balcao(request):
     novo_username = gerar_numeros(4)
     novo_usuario = User.objects.create_user(novo_username)
@@ -186,7 +195,7 @@ class PedidoBalcaoCreateView(CreateView):
 def listar_pedidos_balcao(request):
     tempo_atual = datetime.now()
     tempo_limite = tempo_atual - timedelta(hours=8)
-    pedidos_balcao= PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()
+    pedidos_balcao = PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()
     args = {'pedidos': pedidos_balcao}
     template = 'balcao/pedidos_balcao.html'
     return render(request, template, args)
@@ -234,3 +243,167 @@ def deletar_pedido_balcao(request, id):
     pedido = PedidoBalcao.objects.get(pk=id)
     pedido.delete()
     return redirect('/balcao/pedidos/')
+
+
+# Fechamento de Caixa
+
+def total_dinheiro_delivery():
+    tempo_atual = datetime.now()
+    tempo_limite = tempo_atual - timedelta(hours=8)    
+    pedidos = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Dinheiro').all()
+    total = 0
+
+    for pedido in pedidos:
+        total += pedido.get_valor_total()
+
+    return total
+
+def total_dinheiro_balcao():
+    tempo_atual = datetime.now()
+    tempo_limite = tempo_atual - timedelta(hours=8)    
+    pedidos = PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Dinheiro').all()
+    total = 0
+
+    for pedido in pedidos:
+        total += pedido.get_valor_total()
+    
+    return total
+
+def total_debito_delivery():
+    tempo_atual = datetime.now()
+    tempo_limite = tempo_atual - timedelta(hours=8)
+    pedidos = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Débito').all()
+    total = 0
+
+    for pedido in pedidos:
+        total += pedido.get_valor_total()
+    
+    return total
+
+def total_debito_balcao():
+    tempo_atual = datetime.now()
+    tempo_limite = tempo_atual - timedelta(hours=8)    
+    pedidos = PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Débito').all()
+    total = 0
+
+    for pedido in pedidos:
+        total += pedido.get_valor_total()
+    
+    return total
+
+def total_credito_delivery():
+    tempo_atual = datetime.now()
+    tempo_limite = tempo_atual - timedelta(hours=8)
+    pedidos = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Crédito').all()
+    total = 0
+
+    for pedido in pedidos:
+        total += pedido.get_valor_total()
+    
+    return total
+
+def total_credito_balcao():
+    tempo_atual = datetime.now()
+    tempo_limite = tempo_atual - timedelta(hours=8)
+    pedidos = PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Crédito').all()
+    total = 0
+
+    for pedido in pedidos:
+        total += pedido.get_valor_total()
+    
+    return total
+
+def total_dinheiro():
+    tempo_atual = datetime.now()
+    tempo_limite = tempo_atual - timedelta(hours=8)
+    pedidos_balcao = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Dinheiro').all()
+    pedidos_delivery = PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Dinheiro').all()
+    total = 0
+
+    for pedido_balcao in pedidos_balcao:
+        total += pedido_balcao.get_valor_total()
+
+    for pedido_delivery in pedidos_delivery:
+        total += pedido_delivery.get_valor_total()
+
+    return total
+
+def total_debito():
+    tempo_atual = datetime.now()
+    tempo_limite = tempo_atual - timedelta(hours=8)
+    pedidos_balcao = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Débito').all()
+    pedidos_delivery = PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Débito').all()
+    total = 0
+
+    for pedido_balcao in pedidos_balcao:
+        total += pedido_balcao.get_valor_total()
+
+    for pedido_delivery in pedidos_delivery:
+        total += pedido_delivery.get_valor_total()
+
+    return total
+
+def total_credito():
+    tempo_atual = datetime.now()
+    tempo_limite = tempo_atual - timedelta(hours=8)
+    pedidos_balcao = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Crédito').all()
+    pedidos_delivery = PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Crédito').all()
+    total = 0
+
+    for pedido_balcao in pedidos_balcao:
+        total += pedido_balcao.get_valor_total()
+
+    for pedido_delivery in pedidos_delivery:
+        total += pedido_delivery.get_valor_total()
+
+    return total
+
+def fechamento_total():
+    tempo_atual = datetime.now()
+    tempo_limite = tempo_atual - timedelta(hours=8)
+    pedidos_balcao = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()
+    pedidos_delivery = PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()  
+    total = 0
+
+    for pedido_balcao in pedidos_balcao:
+        total += pedido_balcao.get_valor_total()
+
+    for pedido_delivery in pedidos_delivery:
+        total += pedido_delivery.get_valor_total()
+
+    return total
+
+def fechar_caixa(request):
+    tempo_atual = datetime.now()
+    tempo_limite = tempo_atual - timedelta(hours=8)    
+    pedidos_delivery = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()
+    pedidos_balcao = PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()
+    dinheiro_delivery = total_dinheiro_delivery()
+    dinheiro_balcao = total_dinheiro_balcao()
+    debito_delivery = total_debito_delivery()
+    debito_balcao = total_debito_balcao()
+    credito_delivery = total_credito_delivery()
+    credito_balcao = total_credito_balcao()
+    dinheiro = total_dinheiro()
+    debito = total_debito()
+    credito = total_credito()
+    total = fechamento_total()
+
+    args = {
+        'pedidos_delivery': len(pedidos_delivery),
+        'pedidos_balcao': len(pedidos_balcao),
+        'dinheiro_delivery': dinheiro_delivery,
+        'dinheiro_balcao': dinheiro_balcao,
+        'debito_delivery': debito_delivery,
+        'debito_balcao': debito_balcao,
+        'credito_delivery': credito_delivery,
+        'credito_balcao': credito_balcao,
+        'total_dinheiro': dinheiro,
+        'total_debito': debito,
+        'total_credito': credito,
+        'total': total,
+    }
+
+    template = 'fechamento/caixa.html'
+
+    return render(request, template, args)
