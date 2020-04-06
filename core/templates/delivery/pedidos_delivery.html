@@ -27,8 +27,9 @@
             <th>Recebimento</th>
             <th>Atualização</th>
             <th>Total</th>
-            <th>Pagamento</th>
+            <th>Pagamento Solicitado</th>
             <th></th>
+            <th>Conclusão</th>
             <th>Imprimir</th>
             <th>Editar</th>
             <th>Deletar</th>
@@ -50,6 +51,7 @@
             {% else %}
             <td><img class="payment-status" src="{% static 'img/red.jpg' %}" alt=""></td>
             {% endif %}
+            <td>{{pedido.pagamento_conclusao}}</td>
             <td align="center"><a target="_blank" href="/delivery/pedidos/visualizar/{{pedido.id}}"><img src="{% static 'img/imprimir.png' %}" alt=""></a></td>
             <td align="center"><a target="_blank" href="/delivery/pedidos/editar/{{pedido.id}}"><img src="{% static 'img/editar.png' %}" alt=""></a></td>
             <td align="center"><a href="/delivery/pedidos/deletar/{{pedido.id}}"><img src="{% static 'img/deletar.png' %}" alt=""></a></td>

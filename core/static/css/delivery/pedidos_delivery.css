@@ -32,7 +32,7 @@ table{
     background-color: white;
     border: 10px solid white;
     border-collapse: collapse;
-    width: 90vw;
+    width: 95vw;
 }
 
 td{
@@ -89,11 +89,15 @@ tr > td:nth-child(7){
     width: 120px;
 }
 
-tr > td:nth-child(10), tr > td:nth-child(11), tr > td:nth-child(12), tr > td:nth-child(13){
+tr > td:nth-child(10){
+    text-align: center;
+}
+
+tr > td:nth-child(11), tr > td:nth-child(12), tr > td:nth-child(13), tr > td:nth-child(14){
     width: 80px;
 }
 
-tr > th:nth-child(10), tr > th:nth-child(11), tr > th:nth-child(12), tr > th:nth-child(13){
+tr > th:nth-child(11), tr > th:nth-child(12), tr > th:nth-child(13), tr > th:nth-child(14){
     font-size: 11px;
     font-weight: lighter;
     text-align: center;
