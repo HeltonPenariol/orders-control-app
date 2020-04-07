@@ -10,5 +10,6 @@ Sistema de controle de pedidos de um restarante no Django.
   - Criação, edição, visualização e remoção de clientes.
   - Impressão da comanda de um pedido.
   - Fechamento de caixa.
+  - Visualização de gráficos de relatório do caixa.
   
     ![](https://camo.githubusercontent.com/46dfe14db691a93875fec1365e0ccf43db87e619/68747470733a2f2f6d656469612e67697068792e636f6d2f6d656469612f6f3076777a754677434741464f2f67697068792e676966)
