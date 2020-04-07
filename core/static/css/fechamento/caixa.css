@@ -1,0 +1,23 @@
+body{
+    background-color: #b60b2b;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+header{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 200px;
+}
+
+header > a > img:nth-child(1){
+    margin-top: 15px;
+    width: 100px;
+}
+
+span{
+    font-style: italic;
+}

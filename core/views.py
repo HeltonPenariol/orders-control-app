@@ -402,6 +402,7 @@ def fechar_caixa(request):
         'total_debito': debito,
         'total_credito': credito,
         'total': total,
+        'data': tempo_atual,
     }
 
     template = 'fechamento/caixa.html'

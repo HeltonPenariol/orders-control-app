@@ -1,11 +1,43 @@
 {% extends 'shared/base.html' %}
 
+{% load static %}
+
+{% block static %}
+    <script defer src="{% static 'js/charts.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/fechamento/caixa.css' %}">
+{% endblock static %}
+
 {% block title %}
     <title>Caixa - Fechamento Total</title>
 {% endblock title %}
 
 {% block body %}
-    <p>Quantidades de pedido Delivery: {{pedidos_delivery}}</p>
+    <p id="pedidosBalcao" style="visibility: hidden; position: absolute;">{{pedidos_balcao}}</p>
+    <p id="pedidosDelivery" style="visibility: hidden; position: absolute;">{{pedidos_delivery}}</p>
+
+    <header>
+        <a href="/">
+            <img src="{% static 'img/logoceara.png' %}" alt="Pizzaria do Ceará">
+        </a>
+        <h3>#ceara - Fechamento de Caixa <span>{{data | date:"d M Y"}}</span></h3>
+    </header>
+
+    <div class="chart-orders">
+        <canvas id="chartOrders"></canvas>
+    </div>
+
+    <div class="chart-comparative">
+        <canvas id="chartComparative"></canvas>
+    </div>
+
+    <div class="chart-income">
+        <canvas id="chartIncome"></canvas>
+    </div>
+
+
+    <!-- <p>Quantidades de pedido Delivery: {{pedidos_delivery}}</p>
     <p>Quantidade de pedidos Balcão: {{pedidos_balcao}}</p>
     <p>Pagamentos em dinheiro DELIVERY R${{dinheiro_delivery}}</p>
     <p>Pagamentos em dinheiro BALCAO R${{dinheiro_balcao}}</p>
@@ -18,5 +50,5 @@
     <p>Pagamentos Débito TOTAL R${{total_debito}}</p>
     <p>Pagamentos Crédito TOTAL R${{total_credito}}</p>
     <hr>
-    <p>FECHAMENTO TOTAL: R${{total}}</p>
+    <p>FECHAMENTO TOTAL: R${{total}}</p> -->
 {% endblock body %}
