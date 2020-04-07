@@ -4,31 +4,29 @@ body{
     width: 270px;
 }
 
-body div > h3:nth-child(1){
+
+.ceara{
     margin: 5px 0 0 0;
     text-align: center;
 }
 
-body div > h4:nth-child(2){
+.pedido-id{
     margin: 5px 0 3px 0;
-}
-
-body div > h3:nth-child(1), body > h4:nth-child(2){
     text-align: center;
 }
 
-body div > p:nth-child(3){
+.horario{
     font-size: 11px;
     margin: 1px 0 1px 0;
     text-align: center;
 }
 
-body div > p:nth-child(4){
+.pedido-nome{
     font-size: 13px;
     margin: 3px 0 1px 0;
 }
 
-body div > h4:nth-child(6){
+.itens-title{
     font-size: 14px;
     margin: 5px 0 5px 0;
     text-align: center;

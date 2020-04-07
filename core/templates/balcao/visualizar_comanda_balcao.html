@@ -13,12 +13,12 @@
 
 {% block body %}
     <div id="comanda">
-        <h3>CEARÁ</h3>
-        <h4>comanda BALCÃO: #ceara{{comanda.user}}</h4>
-        <p>{{comanda.horario_recebimento}}</p>
-        <p><strong>Nome: </strong>{{comanda.nome|default:"Não informado"}}</p>
+        <h3 class="ceara">CEARÁ</h3>
+        <h4 class="pedido-id">comanda BALCÃO: #ceara{{comanda.user}}</h4>
+        <p class="horario">{{comanda.horario_recebimento}}</p>
+        <p class="pedido-nome"><strong>Nome: </strong>{{comanda.nome|default:"Não informado"}}</p>
         <hr>
-        <h4>ITENS DO PEDIDO</h4>
+        <h4 class="itens-title">ITENS DO PEDIDO</h4>
         {% for item in comanda.pizzas_grande.all %}
         <p class="itens"><strong>{{item.quantidade}}</strong> {{item.item}} (R${{item.get_valor_item}})</p>
         {% endfor %}
