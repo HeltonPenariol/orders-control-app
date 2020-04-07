@@ -88,3 +88,42 @@ var graficoFechamento = new Chart(fechamentoTotal, {
         },
     }
 })
+
+header = document.getElementById('banner');
+buttons = document.getElementById('buttons');
+
+hidden = document.getElementById('hiddenChart');
+
+chartOrders = document.getElementById('chart-orders');
+chartComparative = document.getElementById('chart-comparative');
+chartIncome = document.getElementById('chart-income');
+
+function showChartOrders(){
+    header.style.visibility = 'hidden';
+    buttons.style.visibility = 'hidden';
+    chartOrders.style.visibility = 'visible';
+    hidden.style.visibility = 'visible';
+}
+
+function showChartComparative(){
+    header.style.visibility = 'hidden';
+    buttons.style.visibility = 'hidden';
+    chartComparative.style.visibility = 'visible';
+    hidden.style.visibility = 'visible';
+}
+
+function showChartIncome(){
+    header.style.visibility = 'hidden';
+    buttons.style.visibility = 'hidden';
+    chartIncome.style.visibility = 'visible';
+    hidden.style.visibility = 'visible';
+}
+
+function hiddenChart(){
+    header.style.visibility = 'visible';
+    buttons.style.visibility = 'visible';
+    chartOrders.style.visibility = 'hidden';
+    chartComparative.style.visibility = 'hidden';
+    chartIncome.style.visibility = 'hidden';
+    hidden.style.visibility = 'hidden';
+}
