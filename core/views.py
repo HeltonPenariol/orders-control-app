@@ -42,7 +42,7 @@ class PedidoDeliveryCreateView(CreateView):
     raise_exception = True
     form_class = PedidoForm
     template_name = 'delivery/criar_pedido_delivery.html'
-    success_url = reverse_lazy('pagina_delivery')
+    success_url = reverse_lazy('pagina_inicial')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -178,7 +178,7 @@ class PedidoBalcaoCreateView(CreateView):
     raise_exception = True
     form_class = PedidoBalcaoForm
     template_name = 'balcao/criar_pedido_balcao.html'
-    success_url = reverse_lazy('pagina_balcao')
+    success_url = reverse_lazy('pagina_inicial')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -250,7 +250,7 @@ def deletar_pedido_balcao(request, id):
 def total_delivery():
     tempo_atual = datetime.now()
     tempo_limite = tempo_atual - timedelta(hours=8)
-    pedidos = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Crédito').all()
+    pedidos = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()
     total = 0
 
     for pedido in pedidos:

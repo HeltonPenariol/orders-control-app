@@ -46,7 +46,7 @@ var graficoComparativo = new Chart(comparativoPedidos, {
             display: true,
             fontSize: 22,
             fontColor: '#fff',
-            text: 'Comparativo de Pedidos'
+            text: 'Comparativo: BALCÃO x DELIVERY'
         },
         legend: {
             labels: {
