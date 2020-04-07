@@ -247,51 +247,7 @@ def deletar_pedido_balcao(request, id):
 
 # Fechamento de Caixa
 
-def total_dinheiro_delivery():
-    tempo_atual = datetime.now()
-    tempo_limite = tempo_atual - timedelta(hours=8)    
-    pedidos = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Dinheiro').all()
-    total = 0
-
-    for pedido in pedidos:
-        total += pedido.get_valor_total()
-
-    return total
-
-def total_dinheiro_balcao():
-    tempo_atual = datetime.now()
-    tempo_limite = tempo_atual - timedelta(hours=8)    
-    pedidos = PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Dinheiro').all()
-    total = 0
-
-    for pedido in pedidos:
-        total += pedido.get_valor_total()
-    
-    return total
-
-def total_debito_delivery():
-    tempo_atual = datetime.now()
-    tempo_limite = tempo_atual - timedelta(hours=8)
-    pedidos = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Débito').all()
-    total = 0
-
-    for pedido in pedidos:
-        total += pedido.get_valor_total()
-    
-    return total
-
-def total_debito_balcao():
-    tempo_atual = datetime.now()
-    tempo_limite = tempo_atual - timedelta(hours=8)    
-    pedidos = PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Débito').all()
-    total = 0
-
-    for pedido in pedidos:
-        total += pedido.get_valor_total()
-    
-    return total
-
-def total_credito_delivery():
+def total_delivery():
     tempo_atual = datetime.now()
     tempo_limite = tempo_atual - timedelta(hours=8)
     pedidos = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Crédito').all()
@@ -302,10 +258,10 @@ def total_credito_delivery():
     
     return total
 
-def total_credito_balcao():
+def total_balcao():
     tempo_atual = datetime.now()
     tempo_limite = tempo_atual - timedelta(hours=8)
-    pedidos = PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual), pagamento_conclusao='Crédito').all()
+    pedidos = PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()
     total = 0
 
     for pedido in pedidos:
@@ -375,15 +331,14 @@ def fechamento_total():
 
 def fechar_caixa(request):
     tempo_atual = datetime.now()
-    tempo_limite = tempo_atual - timedelta(hours=8)    
+    tempo_limite = tempo_atual - timedelta(hours=8)  
+
     pedidos_delivery = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()
     pedidos_balcao = PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()
-    dinheiro_delivery = total_dinheiro_delivery()
-    dinheiro_balcao = total_dinheiro_balcao()
-    debito_delivery = total_debito_delivery()
-    debito_balcao = total_debito_balcao()
-    credito_delivery = total_credito_delivery()
-    credito_balcao = total_credito_balcao()
+
+    fechamento_delivery = total_delivery()
+    fechamento_balcao = total_balcao()
+
     dinheiro = total_dinheiro()
     debito = total_debito()
     credito = total_credito()
@@ -392,12 +347,8 @@ def fechar_caixa(request):
     args = {
         'pedidos_delivery': len(pedidos_delivery),
         'pedidos_balcao': len(pedidos_balcao),
-        'dinheiro_delivery': dinheiro_delivery,
-        'dinheiro_balcao': dinheiro_balcao,
-        'debito_delivery': debito_delivery,
-        'debito_balcao': debito_balcao,
-        'credito_delivery': credito_delivery,
-        'credito_balcao': credito_balcao,
+        'total_balcao': fechamento_balcao,
+        'total_delivery': fechamento_delivery,
         'total_dinheiro': dinheiro,
         'total_debito': debito,
         'total_credito': credito,

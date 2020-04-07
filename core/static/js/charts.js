@@ -1,5 +1,5 @@
-var pedidosBalcao = 1;
-var pedidosDelivery = 3;
+var pedidosBalcao = document.getElementById('pedidosBalcao').innerHTML;
+var pedidosDelivery = document.getElementById('pedidosDelivery').innerHTML;
 var numeroPedidos = document.getElementById('chartOrders').getContext('2d');
 
 var graficoPedidos = new Chart(numeroPedidos, {
@@ -27,8 +27,8 @@ var graficoPedidos = new Chart(numeroPedidos, {
     }
 })
 
-var totalBalcao = 5;
-var totalDelivery = 10;
+var totalBalcao = document.getElementById('totalBalcao').innerHTML;
+var totalDelivery = document.getElementById('totalDelivery').innerHTML;
 var comparativoPedidos = document.getElementById('chartComparative').getContext('2d');
 
 var graficoComparativo = new Chart(comparativoPedidos, {
@@ -56,9 +56,12 @@ var graficoComparativo = new Chart(comparativoPedidos, {
     }
 })
 
-var totalDinheiro = 200;
-var totalDebito = 300;
-var totalCredito = 400;
+var totalDinheiro = document.getElementById('totalDinheiro').innerHTML;
+console.log(totalDinheiro)
+var totalDebito = document.getElementById('totalDebito').innerHTML;
+console.log(totalDebito)
+var totalCredito = document.getElementById('totalCredito').innerHTML;
+console.log(totalCredito)
 var fechamentoTotal = document.getElementById('chartIncome').getContext('2d');
 
 var graficoFechamento = new Chart(fechamentoTotal, {
