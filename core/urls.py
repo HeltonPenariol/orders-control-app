@@ -23,6 +23,7 @@ urlpatterns = [
     path('balcao/pedidos/status/<int:id>', editar_status_balcao, name='editar_status_balcao'),
     path('balcao/pedidos/deletar/<int:id>', deletar_pedido_balcao, name='deletar_pedido_balcao'),
     path('caixa/', fechar_caixa, name='fechar_caixa'),
+    path('caixa/impressao/', visualizar_comanda_fechamento, name='visualizar_comanda_fechamento'),
 
     PizzaGrandePopupCRUDViewSet.urls(),
     PizzaBrotoPopupCRUDViewSet.urls(),

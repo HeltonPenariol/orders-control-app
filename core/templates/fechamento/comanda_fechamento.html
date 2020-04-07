@@ -1,0 +1,30 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block static %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
+    <script defer src="{% static 'js/printOrderPaper.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/fechamento/comanda_fechamento.css' %}">
+{% endblock %}
+
+{% block title %}
+    <title>Comanda de Fechamento</title>
+{% endblock title %}
+
+{% block body %}
+    <div id="comanda">
+        <h3 class="ceara">CEARÁ</h3>
+        <p class="horario">Data de Fechamento: {{data | date:"d M Y"}}</p>
+        <hr>
+        <p class="pedidos-delivery">Número de pedidos (Balcão): {{pedidos_delivery}}</p>
+        <p class="pedidos-balcao">Número de pedidos (Delivery): {{pedidos_balcao}}</p>
+        <hr>
+        <p class="dinheiro">Total de Dinheiro: R$ {{total_dinheiro}}</p>
+        <p class="debito">Total de Débito: R$ {{total_debito}}</p>
+        <p class="credito">Total de Crédito: R$ {{total_credito}}</p>
+        <p class="total">TOTAL: R${{total}}</p>
+        <hr>
+        <p class="rodape">Pizzaria e Hamburgueria do Ceará</p>
+    </div>
+    <input type="button" onclick="imprimirComanda('comanda')" value="Imprimir Fechamento">
+{% endblock body %}

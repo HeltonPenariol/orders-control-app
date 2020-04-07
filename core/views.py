@@ -359,3 +359,29 @@ def fechar_caixa(request):
     template = 'fechamento/caixa.html'
 
     return render(request, template, args)
+
+def visualizar_comanda_fechamento(request):
+    tempo_atual = datetime.now()
+    tempo_limite = tempo_atual - timedelta(hours=8)  
+
+    pedidos_delivery = Pedido.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()
+    pedidos_balcao = PedidoBalcao.objects.filter(horario_recebimento__range=(tempo_limite, tempo_atual)).all()
+
+    dinheiro = total_dinheiro()
+    debito = total_debito()
+    credito = total_credito()
+    total = fechamento_total()
+
+    args = {
+        'pedidos_delivery': len(pedidos_delivery),
+        'pedidos_balcao': len(pedidos_balcao),
+        'total_dinheiro': dinheiro,
+        'total_debito': debito,
+        'total_credito': credito,
+        'total': total,
+        'data': tempo_atual        
+    }
+
+    template = 'fechamento/comanda_fechamento.html'
+
+    return render(request, template, args)
