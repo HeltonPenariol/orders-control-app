@@ -3,7 +3,7 @@ Sistema de controle de pedidos de um restarante no Django.
 
 #### :art: A estilização do projeto foi feita de acordo com o design da [Pizzaria e Hamburgueria do Ceará](https://www.instagram.com/pizzariaceara/)
 
-![Screenshot_1](https://user-images.githubusercontent.com/52453558/78463081-44921480-76af-11ea-9ce2-f58ee895f8ad.png)
+![Screenshot_1](https://user-images.githubusercontent.com/52453558/79637462-3f74a100-8156-11ea-869f-398f3ac83069.png)
 
 #### :pushpin: Funcionalidades:
   - Criação, edição, visualização e remoção de pedidos.
@@ -12,4 +12,4 @@ Sistema de controle de pedidos de um restarante no Django.
   - Fechamento de caixa.
   - Visualização de gráficos de relatório do caixa.
   
-    ![](https://camo.githubusercontent.com/46dfe14db691a93875fec1365e0ccf43db87e619/68747470733a2f2f6d656469612e67697068792e636f6d2f6d656469612f6f3076777a754677434741464f2f67697068792e676966)
+![skeleton_computer](https://user-images.githubusercontent.com/52453558/79544107-e11bc580-8064-11ea-8167-5ab87362fc72.gif)
