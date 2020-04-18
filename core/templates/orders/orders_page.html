@@ -1,0 +1,32 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+
+{% block static %}
+<link rel="stylesheet" href="{% static 'css/orders/orderspage.css' %}">
+{% endblock static %}
+
+{% block title %}
+<title>Gerenciamento de Pedidos</title>
+{% endblock title %}
+
+{% block body %}
+<header>
+    <h1>GERENCIAMENTO DE PEDIDOS</h1>
+</header>
+
+<section>
+    <a href="/orders/new/" class="card-link">
+        <div class="card-container">
+            <img src="{% static 'images/icons/add.png' %}" alt="">
+            <p>Novo Pedido</p>
+        </div>
+    </a>
+
+    <a href="/orders/list/" class="card-link">
+        <div class="card-container">
+            <img src="{% static 'images/icons/history.png' %}" alt="">
+            <p>Últimos Pedidos</p>
+        </div>
+    </a>
+</section>
+{% endblock body %}

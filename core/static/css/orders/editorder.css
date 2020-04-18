@@ -1,0 +1,331 @@
+h2{
+    font-size: 21px;
+    left: 375px;
+    position: absolute;
+    top: 181.267px;
+}
+
+h4{
+    bottom: 0px;
+    color: #484848;
+    height: 20px;
+    left: 1245px;
+    position: absolute;
+    right: 0px;
+    top: 125px;
+}
+
+section{
+    align-items: center;
+    background-color: white;
+    display: grid;
+    grid-template-columns: 27% 73%;
+    height: 80vh;
+    justify-content: center;
+    margin-left: 15px;
+    margin-top: 25px;
+    width: 97.7vw;
+}
+
+section > div:nth-child(1){
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+section > div:nth-child(1) > div:nth-child(1) > img{
+    height: 125px;
+}
+
+/* Estilizar a Visualização Itens */
+.order-items{
+    background-color: #f0f0f5;
+    border-radius: 4px;
+    color: #484848;
+    left: 375.317px;
+    padding: 12px;
+    position: absolute;
+    top: 252.267px;
+    width: 620px;
+}
+
+.order-items > div > p{
+    font-size: 14.6px;
+}
+
+.order-items > div > p:nth-child(2){
+    margin-top: 16px;
+}
+
+.subtotal{
+    display: flex;
+    font-weight: bold;
+    justify-content: right;
+    margin-top: 5px;
+}
+
+/* Estilizar Botões */
+.view-button{
+    background-color: orange;
+    left: 1046.317px;
+    position: absolute;
+    top: 170.267px;
+}
+
+.confirm-button{
+    background-color: #35bc7a;
+    left: 1046.317px;
+    position: absolute;
+    top: 570.267px;
+}
+
+.order-button{
+    border-radius: 4px;
+    display: flex;
+    height: 45px;
+    justify-content: center;
+    transition: font-size 0.1s linear;
+    width: 290px;
+}
+
+.view-button:hover{
+    background-color: rgb(255, 184, 51);
+}
+
+.confirm-button:hover{
+    background-color: rgb(18, 214, 54);
+}
+
+.order-button{
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.view-button > div{
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.view-button > div > img{
+    width: 25px;
+}
+
+.control-button > a{
+    align-items: center;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+    width: 90%;
+}
+
+.control-button > a > img{
+    width: 25px;
+}
+
+/* Estilizar o Menu */
+.item-container{
+    align-items: center;
+    background-color: #b60b2a;
+    color: white;
+    display: flex;
+    height: 45px;
+    margin-bottom: 7px;
+    margin-top: 7px;
+    transition: font-size 0.1s linear;
+    width: 275px;
+}
+
+.item-container:hover{
+    background-color: #e01037;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.item-container > p{
+    margin-left: 15px;
+}
+
+/* Deixar os formulários invisíveis */
+.pizza-container, .esfiha-container, .lanche-container, .pastel-container,
+.beirute-container, .sobremesa-container, .bebida-container{
+    visibility: hidden;
+}
+
+/* Setar H1s */
+.pizza-container > h1{
+    color: #1f1b1c;
+    font-size: 30pt;
+    position: absolute;
+    left: 445px;
+    bottom: 0px;
+    right: 0px;
+    top: 125px;
+    height: 50px;
+    width: 335px;
+}
+
+.lanche-container > h1,
+.esfiha-container > h1,
+.pastel-container > h1,
+.beirute-container > h1,
+.sobremesa-container > h1,
+.bebida-container > h1{
+    color: #1f1b1c;
+    font-size: 30pt;
+    position: absolute;
+    left: 445px;
+    bottom: 0px;
+    right: 0px;
+    top: 260px;
+    height: 50px;
+    width: 400px;
+}
+
+/* Setar a posição dos formulários */
+.add-pizza{
+    bottom: 0px;
+    left: 445px;
+    position: absolute;
+    right: 0px;
+    top: 195px;
+    width: 420px;
+}
+
+.add-esfiha, .add-lanche, .add-pastel, .add-beirute, .add-sobremesa, .add-bebida{
+    bottom: 0px;
+    height: 45%;
+    left: 445px;
+    position: absolute;
+    right: 0px;
+    top: 320px;
+    width: 25%;
+}
+
+.add-pizza > form{
+    width: 55%;
+}
+
+/* Adicionar largura para os Inputs Select */
+.add-pizza > form > p:nth-child(2),
+.add-pizza > form > p:nth-child(3),
+.add-esfiha > form > p:nth-child(2),
+.add-esfiha > form > p:nth-child(3),
+.add-lanche > form > p:nth-child(2),
+.add-pastel > form > p:nth-child(2),
+.add-beirute > form > p:nth-child(2),
+.add-sobremesa > form > p:nth-child(2),
+.add-bebida > form > p:nth-child(2){
+    width: 250px;
+}
+
+/* Adicionar margem ao terceiro Input dos formulários */
+.add-pizza > form > p:nth-child(3),
+.add-esfiha > form > p:nth-child(3),
+.add-lanche > form > p:nth-child(3),
+.add-pastel > form > p:nth-child(3),
+.add-beirute > form > p:nth-child(3),
+.add-sobremesa > form > p:nth-child(3),
+.add-bebida > form > p:nth-child(3){
+    margin-bottom: 12px;
+    margin-top: 7px;
+}
+
+.add-pizza > form > p:nth-child(4){
+    margin-bottom: 4px;
+}
+
+.add-pizza > form > p:nth-child(6){
+    margin-top: 6px;
+}
+
+/* Estilização do Input Number dos formulários */
+.add-pizza > form > p:nth-child(7) > input,
+.add-esfiha > form > p:nth-child(4) > input,
+.add-lanche > form > p:nth-child(3) > input,
+.add-pastel > form > p:nth-child(3) > input,
+.add-beirute > form > p:nth-child(3) > input,
+.add-sobremesa > form > p:nth-child(3) > input,
+.add-bebida > form > p:nth-child(3) > input{
+    padding: 4px 8px;
+    width: 65px;
+}
+
+/* Estilização do Input Select dos formulários */
+.add-pizza > form > p:nth-child(2) > select,
+.add-pizza > form > p:nth-child(3) > select,
+.add-esfiha > form > p:nth-child(2) > select,
+.add-esfiha > form > p:nth-child(3) > select,
+.add-lanche > form > p:nth-child(2) > select,
+.add-pastel > form > p:nth-child(2) > select,
+.add-beirute > form > p:nth-child(2) > select,
+.add-sobremesa > form > p:nth-child(2) > select,
+.add-bebida > form > p:nth-child(2) > select{
+    background: transparent;
+    box-shadow: none;
+    padding: 3px 8px;
+    width: 80%;
+}
+
+/* Estilização do botão de submit dos formulários */
+.submit-pizza{
+    width: 405px;
+}
+
+.submit-esfiha, .submit-group{
+    width: 200px;
+}
+
+.submit-pizza, .submit-group{
+    background-color: #2091ec;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    height: 30px;
+    margin-top: 8px;
+    transition: font-size 0.1s linear;
+}
+
+.submit-pizza:hover, .submit-group:hover{
+    background-color: #2083d4;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Estilização dos recheios de pizza */
+#id_recheios{
+    display: grid;
+    grid-template-columns: 225px 225px;
+    grid-template-rows: 20px 20px 20px 20px 20px 20px 20px 20px 20px 20px;
+}
+
+/* Estilização da notificação */
+.alert{
+    position: absolute;
+    left: 1045px;
+    top: 115px;
+    right: 0;
+    bottom: 0;
+    border-radius: 4px;
+    height: 40px;
+    padding: 8px 14px 8px 14px;
+    text-align: center;
+    width: 180px;
+}
+
+.alert-sucess{
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+    line-height: 1.5;
+}
+
+.alert-danger{
+    background-color: #f8d7da;
+    border-color: #be9fa2;
+    color: #721c24;
+    line-height: 1.5;
+}

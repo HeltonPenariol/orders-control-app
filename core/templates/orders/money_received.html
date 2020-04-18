@@ -1,0 +1,329 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+
+{% block static %}
+<link rel="stylesheet" href="{% static 'css/orders/moneyreceived.css' %}">
+{% endblock static %}
+
+{% block title %}
+<title>Dinheiro Recebido</title>
+{% endblock title %}
+
+{% block body %}
+<h1>pedido: #ceara{{pedido.numero_identificacao}}</h1>
+
+<section>
+    <div>
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                <h2>Dinheiro Recebido</h2>
+                {{form.as_p}}
+                <button type="submit">Salvar</button>
+                <a href="/orders/list/" class="cancel-button">Cancelar</a>
+            </form>
+        </div>
+
+        <div>
+            <div>
+                <button id="1/4-din" onclick="increment025Din()">+0.25</button>
+                <button id="1/2-din" onclick="increment05Din()">+0.5</button>
+                <button id="one-din" onclick="incrementOneDin()">+1</button>
+                <button id="five-din" onclick="incrementFiveDin()">+5</button>
+                <button id="ten-din" onclick="incrementTenDin()">+10</button>
+                <button id="max-din" onclick="incrementTotalDin()">MAX.</button>
+                <button id="rem-din" onclick="removeDin()">REM.</button>
+            </div>
+
+            <div>
+                <button id="1/4-deb" onclick="increment025Deb()">+0.25</button>
+                <button id="1/2-deb" onclick="increment05Deb()">+0.5</button>
+                <button id="one-deb" onclick="incrementOneDeb()" >+1</button>
+                <button id="five-deb" onclick="incrementFiveDeb()">+5</button>
+                <button id="ten-deb" onclick="incrementTenDeb()">+10</button>
+                <button id="max-deb" onclick="incrementTotalDeb()">MAX.</button>
+                <button id="rem-deb" onclick="removeDeb()">REM.</button>
+            </div>
+
+            <div>
+                <button id="1/4-cre" onclick="increment025Cre()">+0.25</button>
+                <button id="1/2-cre" onclick="increment05Cre()">+0.5</button>
+                <button id="one-cre" onclick="incrementOneCre()">+1</button>
+                <button id="five-cre" onclick="incrementFiveCre()">+5</button>
+                <button id="ten-cre" onclick="incrementTenCre()">+10</button>
+                <button id="max-cre" onclick="incrementTotalCre()">MAX.</button>
+                <button id="rem-cre" onclick="removeCre()">REM.</button>
+            </div>
+        </div>
+
+        <div>
+            <p>Recebido: R$<span id="received">0</span></p>
+            <p>A receber: R$<span id="receivable">{{pedido.total}}</span></p>
+            <p>Total: R$<span id="total-order">{{pedido.total}}</span></p>
+        </div>
+    </div>
+</section>
+
+<script>
+    var add025Din = document.getElementById("1/4-din");
+    var add05Din = document.getElementById("1/2-din");
+    var add1Din = document.getElementById("one-din");
+    var add5Din = document.getElementById("five-din");
+    var add10Din = document.getElementById("ten-din");
+    var addMaxDin = document.getElementById("max-din");
+    var remDin = document.getElementById("rem-din");
+
+    var add025Deb = document.getElementById("1/4-deb");
+    var add05Deb = document.getElementById("1/2-deb");
+    var add1Deb = document.getElementById("one-deb");
+    var add5Deb = document.getElementById("five-deb");
+    var add10Deb = document.getElementById("ten-deb");
+    var addMaxDeb = document.getElementById("max-deb");
+    var remDeb = document.getElementById("rem-deb");
+    
+    var add025Cre = document.getElementById("1/4-cre");
+    var add05Cre = document.getElementById("1/2-cre");
+    var add1Cre = document.getElementById("one-cre");
+    var add5Cre = document.getElementById("five-cre");
+    var add10Cre = document.getElementById("ten-cre");
+    var addMaxCre = document.getElementById("max-cre");
+    var remCre = document.getElementById("rem-cre");
+
+    var valorRecebido = document.getElementById("received");
+    var valorPendente = document.getElementById("receivable");
+    var valorTotal = document.getElementById("total-order");
+
+    var dinheiroRecebido = document.getElementById("id_dinheiro_recebido");
+    var debitoRecebido = document.getElementById("id_debito_recebido");
+    var creditoRecebido = document.getElementById("id_credito_recebido");
+
+    function initializeInfo(){
+        let recebidos = 0;
+        recebidos = recebidos - (- dinheiroRecebido.value);
+        recebidos = recebidos - (- debitoRecebido.value);
+        recebidos = recebidos - (- debitoRecebido.value);
+
+        valorRecebido.innerHTML = recebidos;
+        valorPendente.innerHTML = valorTotal.innerHTML - recebidos;
+    }
+
+    function atualizeInfo(value){
+        let recebido_atual = valorRecebido.innerHTML;
+        let recebido_atualizado = recebido_atual - (- value);
+        valorRecebido.innerHTML = recebido_atualizado;
+
+        let pendente_atual = valorPendente.innerHTML;
+        let pendente_atualizado = pendente_atual - value;
+        valorPendente.innerHTML = pendente_atualizado;
+    }
+
+    function decreasingDinInfo(){
+        let dinheiro_atual = dinheiroRecebido.value;
+        let recebido_atualizado = valorRecebido.innerHTML - dinheiro_atual;
+        let pendente_atualizado = valorPendente.innerHTML - (- dinheiro_atual);
+        valorRecebido.innerHTML = recebido_atualizado;
+        valorPendente.innerHTML = pendente_atualizado;
+    }
+
+    function decreasingDebInfo(){
+        let debito_atual = debitoRecebido.value;
+        let recebido_atualizado = valorRecebido.innerHTML - debito_atual;
+        let pendente_atualizado = valorPendente.innerHTML - (- debito_atual);
+        valorRecebido.innerHTML = recebido_atualizado;
+        valorPendente.innerHTML = pendente_atualizado;
+    }
+
+    function decreasingCreInfo(){
+        let credito_atual = creditoRecebido.value;
+        let recebido_atualizado = valorRecebido.innerHTML - credito_atual;
+        let pendente_atualizado = valorPendente.innerHTML - (- credito_atual);
+        valorRecebido.innerHTML = recebido_atualizado;
+        valorPendente.innerHTML = pendente_atualizado;
+    }
+
+    function increment025Din(){
+        let atual = dinheiroRecebido.value;
+        let novo = atual - (- 0.25);
+        dinheiroRecebido.value = novo;
+
+        value = 0.25;
+        atualizeInfo(value);
+    }
+
+    function increment05Din(){
+        let atual = dinheiroRecebido.value;
+        let novo = atual - (- 0.5);
+        dinheiroRecebido.value = novo;
+
+        value = 0.5;
+        atualizeInfo(value);
+    }
+
+    function incrementOneDin(){
+        let atual = dinheiroRecebido.value;
+        let novo = atual - (- 1);
+        dinheiroRecebido.value = novo;
+
+        value = 1;
+        atualizeInfo(value);
+    }
+
+    function incrementFiveDin(){
+        let atual = dinheiroRecebido.value;
+        let novo = atual - (- 5);
+        dinheiroRecebido.value = novo;
+
+        value = 5;
+        atualizeInfo(value);
+    }
+
+    function incrementTenDin(){
+        let atual = dinheiroRecebido.value;
+        let novo = atual - (- 10);
+        dinheiroRecebido.value = novo;
+
+        value = 10;
+        atualizeInfo(value);
+    }
+
+    function incrementTotalDin(){
+        let atual = dinheiroRecebido.value;
+        let total = valorTotal.innerHTML;
+        let diferenca = valorTotal.innerHTML - valorRecebido.innerHTML;
+        let novo = atual - (- diferenca);
+        dinheiroRecebido.value = novo;
+
+        value = diferenca;
+        atualizeInfo(diferenca);
+    }
+
+    function removeDin(){
+        decreasingDinInfo()
+        dinheiroRecebido.value = 0;
+    }
+
+    function increment025Deb(){
+        let atual = debitoRecebido.value;
+        let novo = atual - (- 0.25);
+        debitoRecebido.value = novo;
+
+        value = 0.25;
+        atualizeInfo(value);
+    }
+
+    function increment05Deb(){
+        let atual = debitoRecebido.value;
+        let novo = atual - (- 0.5);
+        debitoRecebido.value = novo;
+
+        value = 0.5;
+        atualizeInfo(value);
+    }
+
+    function incrementOneDeb(){
+        let atual = debitoRecebido.value;
+        let novo = atual - (- 1);
+        debitoRecebido.value = novo;
+
+        value = 1;
+        atualizeInfo(value);
+    }
+
+    function incrementFiveDeb(){
+        let atual = debitoRecebido.value;
+        let novo = atual - (- 5);
+        debitoRecebido.value = novo;
+
+        value = 5;
+        atualizeInfo(value);
+    }
+
+    function incrementTenDeb(){
+        let atual = debitoRecebido.value;
+        let novo = atual - (- 10);
+        debitoRecebido.value = novo;
+
+        value = 10;
+        atualizeInfo(value);
+    }
+
+    function incrementTotalDeb(){
+        let atual = debitoRecebido.value;
+        let total = valorTotal.innerHTML;
+        let diferenca = valorTotal.innerHTML - valorRecebido.innerHTML;
+        let novo = atual - (- diferenca);
+        debitoRecebido.value = novo;
+
+        value = diferenca;
+        atualizeInfo(diferenca);
+    }
+
+    function removeDeb(){
+        decreasingDebInfo()
+        debitoRecebido.value = 0;
+    }
+
+    function increment025Cre(){
+        let atual = creditoRecebido.value;
+        let novo = atual - (- 0.25);
+        creditoRecebido.value = novo;
+
+        value = 0.25;
+        atualizeInfo(value);
+    }
+
+    function increment05Cre(){
+        let atual = creditoRecebido.value;
+        let novo = atual - (- 0.5);
+        creditoRecebido.value = novo;
+
+        value = 0.5;
+        atualizeInfo(value);
+    }
+
+    function incrementOneCre(){
+        let atual = creditoRecebido.value;
+        let novo = atual - (- 1);
+        creditoRecebido.value = novo;
+
+        value = 1;
+        atualizeInfo(value);
+    }
+
+    function incrementFiveCre(){
+        let atual = creditoRecebido.value;
+        let novo = atual - (- 5);
+        creditoRecebido.value = novo;
+
+        value = 5;
+        atualizeInfo(value);
+    }
+
+    function incrementTenCre(){
+        let atual = creditoRecebido.value;
+        let novo = atual - (- 10);
+        creditoRecebido.value = novo;
+
+        value = 10;
+        atualizeInfo(value);
+    }
+
+    function incrementTotalCre(){
+        let atual = creditoRecebido.value;
+        let total = valorTotal.innerHTML;
+        let diferenca = valorTotal.innerHTML - valorRecebido.innerHTML;
+        let novo = atual - (- diferenca);
+        creditoRecebido.value = novo;
+
+        value = diferenca;
+        atualizeInfo(diferenca);
+    }
+
+    function removeCre(){
+        decreasingCreInfo()
+        creditoRecebido.value = 0;
+    }
+
+    window.onload = initializeInfo();
+</script>
+{% endblock body %}

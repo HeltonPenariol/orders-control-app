@@ -16,7 +16,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
-    'popup',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +80,3 @@ USE_L10N = True
 USE_TZ = False
 
 STATIC_URL = '/static/'
-
-POPUP_TEMPLATE_NAME_CREATE = 'popup/create.html'
-
-POPUP_TEMPLATE_NAME_UPDATE = 'popup/update.html'

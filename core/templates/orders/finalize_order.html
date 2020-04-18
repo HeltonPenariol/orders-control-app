@@ -1,0 +1,224 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+
+{% block static %}
+<link rel="stylesheet" href="{% static 'css/orders/finalizeorder.css' %}">
+{% endblock static %}
+
+{% block title %}
+<title>Finalizar Pedido</title>
+{% endblock title %}
+
+{% block body %}
+<section>
+    <div>
+        <div>
+            <div>
+                <h1>PEDIDO <span>#ceara{{request.user}}</span></h1>
+            </div>
+
+            <div>
+                <h3>ITENS DO PEDIDO</h3>
+                {% if not pizzas and not esfihas and not lanches and not pasteis and not beirutes and not bebidas and not bolos %}
+                <p>Nenhum item adicionado.</p>
+                {% endif %}
+
+                {% if pizzas %}
+                {% for pizza in pizzas %}
+                <p>
+                    {{pizza}}
+                </p>
+                {% endfor %}
+                {% endif %}
+
+                {% if esfihas %}
+                {% for esfiha in esfihas %}
+                <p>
+                    {{esfiha}}
+                </p>
+                {% endfor %}
+                {% endif %}
+
+                {% if lanches %}
+                {% for lanche in lanches %}
+                <p>
+                    {{lanche}}
+                </p>
+                {% endfor %}
+                {% endif %}
+
+                {% if pasteis %}
+                {% for pastel in pasteis %}
+                <p>
+                    {{pastel}}
+                </p>
+                {% endfor %}
+                {% endif %}
+
+                {% if beirutes %}
+                {% for beirute in beirutes %}
+                <p>
+                    {{beirute}}
+                </p>
+                {% endfor %}
+                {% endif %}
+
+                {% if bolos %}
+                {% for bolo in bolos %}
+                <p>
+                    {{bolo}}
+                </p>
+                {% endfor %}
+                {% endif %}
+
+                {% if bebidas %}
+                {% for bebida in bebidas %}
+                <p>
+                    {{bebida}}
+                </p>
+                {% endfor %}
+                {% endif %}
+                <p>SUBTOTAL: R$ <span id="subtotal">{{subtotal}}</span></p>
+            </div>
+        </div>
+
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                <h1>Dados do Pedido</h1>
+                {{ form_pedido.as_p }}
+                <button type="submit">Finalizar</button>
+                <div>
+                    <a href="/orders/new/">
+                        Editar Pedido
+                    </a>
+                    
+                    <a href="/orders/">
+                        Cancelar Pedido
+                    </a>
+                </div>
+            </form>
+
+            <div id="taxa-entrega">
+                <div class="sum sumTE" onclick=sumTE()>
+                    <p>+</p>
+                </div>
+
+                <div class="sub subTE" onclick=subTE()>
+                    <p>-</p>
+                </div>
+            </div>
+
+            <div id="taxa-adicional">
+                <div class="sum sumTA" onclick=sumTA()>
+                    <p>+</p>
+                </div>
+
+                <div class="sub subTA" onclick=subTA()>
+                    <p>-</p>
+                </div>
+            </div>
+
+            <div id="desconto">
+                <div class="sum sumDE" onclick=sumDE()>
+                    <p>+</p>
+                </div>
+
+                <div class="sub subDE" onclick=subDE()>
+                    <p>-</p>
+                </div>
+            </div>
+
+            <div id="total-pedido">
+                <p>TOTAL: R$ <span id="total">0</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    function sumTE(){
+        let atual = document.getElementById("id_taxa").value;
+        let novo = atual - (- 1);
+        document.getElementById("id_taxa").value = novo;
+        total = total + 1;
+        document.getElementById("total").innerHTML = total;
+    }
+
+    function subTE(){
+        let atual = document.getElementById("id_taxa").value;
+        if(atual > 0){
+            let novo = atual - 1;
+            document.getElementById("id_taxa").value = novo;
+            total = total - 1;
+            document.getElementById("total").innerHTML = total;
+        }else{
+            alert("O valor da taxa já atingiu o valor mínimo.")
+        }
+    }
+
+    function sumTA(){
+        let atual = document.getElementById("id_adicional").value;
+        let novo = atual - (- 0.5);
+        document.getElementById("id_adicional").value = novo;
+        total = total + 0.5;
+        document.getElementById("total").innerHTML = total;
+    }
+
+    function subTA(){
+        let atual = document.getElementById("id_adicional").value;
+        if(atual > 0){
+            let novo = atual - 0.5;
+            document.getElementById("id_adicional").value = novo;
+            total = total - 0.5;
+            document.getElementById("total").innerHTML = total;
+        }else{
+            alert("O valor da taxa já atingiu o valor mínimo.")
+        }
+    }
+
+    function sumDE(){
+        let atual = document.getElementById("id_desconto").value;
+        let novo = atual - (- 0.5);
+        document.getElementById("id_desconto").value = novo;
+        total = total - 0.5;
+        document.getElementById("total").innerHTML = total;
+    }
+
+    function subDE(){
+        let atual = document.getElementById("id_desconto").value;
+        if(atual > 0){
+            let novo = atual - 0.5;
+            document.getElementById("id_desconto").value = novo;
+            total = total + 0.5;
+            document.getElementById("total").innerHTML = total;
+        }else{
+            alert("O valor do desconto já atingiu o valor mínimo.")
+        }
+    }
+
+    var total = parseFloat(document.getElementById("total").innerHTML);
+    var subTotal = parseFloat(document.getElementById("subtotal").innerHTML);
+    var taxaEntrega = parseFloat(document.getElementById("id_taxa").value);
+    var taxaAdicional = parseFloat(document.getElementById("id_adicional").value);
+    var desconto = parseFloat(document.getElementById("id_desconto").value);
+
+    console.log('Valor total ', total);
+    console.log('Subtotal ', subTotal);
+    console.log('Taxa de entrega ', taxaEntrega);
+    console.log('Taxa Adicional ', taxaAdicional);
+    console.log('Desconto ', desconto);
+
+    function calculateTotal(){
+        total = total + subTotal;
+        total = total + taxaEntrega;
+        total = total + taxaAdicional;
+        total = total + desconto;
+        document.getElementById("total").innerHTML = total;
+        console.log('Função calcular o total ativa', total);
+    }
+
+    window.onload = calculateTotal();
+</script>
+
+{% endblock body %}

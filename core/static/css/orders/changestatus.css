@@ -1,0 +1,91 @@
+button{
+    background-color: #484848;
+    border: none;
+    color: white;
+    font-size: 10px;
+    height: 20px;
+    width: 40px;
+}
+
+button:hover{
+    background-color: #5c5c5c;
+    cursor: pointer;
+}
+
+button[type="submit"], .cancel-button{
+    border-radius: 3px;
+    font-size: 14px;
+    height: 35px;
+    margin-top: 16px;
+    width: 95%;
+}
+
+button[type="submit"]{
+    background-color: #35bc7a;
+    margin-top: 45px;
+}
+
+button[type="submit"]:hover{
+    background-color: rgb(18, 214, 54);
+    cursor: pointer;
+}
+
+.cancel-button{
+    background-color: #f34642;
+    margin-top: 4px;
+}
+
+.cancel-button:hover{
+    background-color: #f0123b;
+}
+
+form{
+    height: 150px;
+}
+
+form > a{
+    align-items: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+form > p{
+    height: 24px;
+}
+
+h1{
+    color: #484848;
+    font-size: 27px;
+    left: 671px;
+    position: absolute;
+    top: 212.667px;
+}
+
+h2{
+    margin-bottom: 35px;
+}
+
+section{
+    align-items: center;
+    display: flex;
+    height: 88vh;
+    justify-content: center;
+}
+
+section > div{
+    align-items: center;
+    background-color: white;
+    border-radius: 4px;
+    display: flex;
+    height: 60%;
+    justify-content: center;
+    width: 50%;
+}
+
+select{
+    background: transparent;
+    box-shadow: none;
+    padding: 3px 8px;
+    width: 95%;
+}

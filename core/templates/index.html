@@ -1,26 +1,43 @@
-{% extends 'shared/base.html' %}
-
 {% load static %}
 
-{% block title %}
-    <title>#ceara - Página Inicial</title>
-{% endblock title %}
-
-{% block static %}
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'images/logo/logoceara.ico' %}"/>
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
-{% endblock static %}
-
-{% block body %}
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    <title>Página Inicial</title>
+</head>
+<body>
     <header>
-        <img src="{% static 'img/logoceara.png' %}">
-        <h2>GESTOR DE PEDIDOS #ceará</h2>
+        <img src="{% static 'images/logo/chapeu-cangaceiro.png' %}">
+        <h2>CEARÁ</h2>
+        <h4>Gestor de Pedidos</h4>
     </header>
 
-    <div>
-        <a href="/delivery/">pedidos: DELIVERY</a>
-        <a href="/delivery/clientes/">clientes: DELIVERY</a>
-        <a href="/balcao/">pedidos: BALCÃO</a>
-        <a href="/caixa/">fechamento: CAIXA</a>
-    </div>
-{% endblock body %}
+    <section>
+        <a href="orders/" class="card-link">
+            <div class="card-container">
+                <img src="{% static 'images/icons/order.png' %}" alt="">
+                <p>Página de Pedidos</p>
+            </div>
+        </a>
+
+        <a href="costumers/list/" class="card-link">
+            <div class="card-container">
+                <img src="{% static 'images/icons/person.png' %}" alt="">
+                <p>Clientes</p>                
+            </div>
+        </a>
+
+        <a href="contability/" class="card-link">
+            <div class="card-container">
+                <img src="{% static 'images/icons/cash.png' %}" alt="">
+                <p>Faturamento</p>      
+            </div>
+        </a>
+    </section>
+</body>
+</html>

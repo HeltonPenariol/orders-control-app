@@ -1,0 +1,116 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+
+{% block static %}
+<link rel="stylesheet" href="{% static 'css/contability/accounting.css' %}">
+{% endblock static %}
+
+{% block title %}
+<title>Fechamento</title>
+{% endblock title %}
+
+{% block body %}
+<section>
+    <div>
+
+        <div>
+            <img class="accounting-icon" src="{% static 'images/icons/accounting.png' %}" alt="">
+            <h3>Fechamento</h3>
+            <h4>{{data | date:"d M Y"}}</h4>
+        </div>
+
+        <div class="cards">
+            <div class="card orders-number">
+                <h4>NÚMERO DE PEDIDOS</h4>
+                <div class="info-numbers">
+                    <img class="d-icon" src="{% static 'images/icons/delivery.png' %}" alt="">
+                    <p>DELIVERY</p>
+                    <p>{{numero_delivery}}</p>
+                </div>
+                <div class="info-numbers">
+                    <img class="b-icon" src="{% static 'images/icons/map.png' %}" alt="">
+                    <p>BALCÃO</p>
+                    <p>{{numero_balcao}}</p>
+                </div>
+            </div>
+
+            <div class="card total-number">
+                <h4>APURAMENTO</h4>
+
+                <div class="info-accounting">
+                    <div>
+                        <div>
+                            <img class="icon-info" src="{% static 'images/icons/money.png' %}" alt="">
+                            <p>DINHEIRO:</p>
+                        </div>
+                        <p>R$ {{total_dinheiro}}</p>
+                    </div>
+                </div>
+
+                <div class="info-accounting">
+                    <div>
+                        <div>
+                            <img class="icon-info" src="{% static 'images/icons/card.png' %}" alt="">
+                            <p>DÉBITO:</p>
+                        </div>
+                        <p>R$ {{total_debito}}</p>
+                    </div>
+                </div>
+
+                <div class="info-accounting">
+                    <div>
+                        <div>
+                            <img class="icon-info" src="{% static 'images/icons/card.png' %}" alt="">
+                            <p>CRÉDITO:</p>
+                        </div>
+                        <p>R$ {{total_credito}}</p>
+                    </div>
+                </div>
+
+                <div class="info-total">
+                    <p>TOTAL: R$ {{total_dia}}</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="paper" id="paper">
+            <p class="ceara">Ceará</p>
+            <h4 class="fechamento">FECHAMENTO</h4>
+            <p class="data">{{data | date:"d M Y"}}</p>
+            <hr>
+            <h5 class="h5">NÚMERO DE PEDIDOS</h5>
+            <p>N. de Pedidos (Delivery): {{numero_delivery}}</p>
+            <p class="npedidos">N. de Pedidos (Balcão): {{numero_balcao}}</p>
+            <hr>
+            <h5 class="h5">APURAMENTO</h5>
+            <p>DINHEIRO: R$ {{total_dinheiro}}</p>
+            <p>DÉBITO: R$ {{total_debito}}</p>
+            <p>CRÉDITO: R$ {{total_credito}}</p>
+            <p class="total">TOTAL: R$ {{total_dia}}</p>
+            <hr>
+            <p class="rodape">Pizzaria e Hamburgueria Ceará</p>
+        </div>
+
+        <div>
+            <button onclick="printPaper('paper')">Imprimir</button>
+        </div>
+    </div>
+</section>
+
+<script>
+    function printPaper(div){
+        let comanda = document.getElementById(div).innerHTML;
+        let conteudoHtml = document.body.innerHTML;
+
+        document.body.innerHTML = comanda;
+        document.body.classList.add('body-paper');
+        window.print();
+        document.body.classList.remove('body-paper');
+        
+        document.body.innerHTML = conteudoHtml;
+    }
+</script>
+{% endblock body %}

@@ -1,0 +1,40 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+
+{% block static %}
+<link rel="stylesheet" href="{% static 'css/costumers/listcostumers.css' %}">
+{% endblock static %}
+
+{% block title %}
+<title>Cadastro de Cliente</title>
+{% endblock title %}
+
+{% block body %}
+<section>
+    <div>
+        <p>{{numero_clientes}} clientes encontrados.</p>
+    </div>
+
+    <div>
+        <table>
+            <tr>
+                <th>Nome</th>
+                <th>Endereço</th>
+                <th>Telefone</th>
+                <th>Editar</th>
+                <th>Excluir</th>
+            </tr>
+
+            {% for cliente in clientes %}
+            <tr>
+                <td>{{cliente.nome|default:"Não informado"}}</td>
+                <td>{{cliente.identificacao}}</td>
+                <td>{{cliente.telefone}}</td>
+                <td><a href="/costumers/edit/{{cliente.id}}"><img src="{% static 'images/icons/edit.png' %}"></a></td>
+                <td><a href="/costumers/delete/{{cliente.id}}"><img src="{% static 'images/icons/delete.png' %}"></a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+{% endblock body %}

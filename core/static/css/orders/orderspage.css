@@ -1,20 +1,24 @@
-header{
-    align-items: center;
+h1{
     color: #484848;
-    display: flex;
-    flex-direction: column;
-    font-weight: lighter;
-    height: 300px;
-    justify-content: center;
+    font-size: 28pt;
 }
 
-header > img{
-    width: 200px;
+header{
+    align-items: center;
+    display: flex;
+    height: 20vh;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 section{
     align-items: center;
     display: flex;
     justify-content: center;
+    height: 40vh;
     margin-top: 25px;
+}
+
+.card-container{
+    background-color: #262626;
 }

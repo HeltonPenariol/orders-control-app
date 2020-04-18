@@ -1,0 +1,71 @@
+{% load static %}
+
+{% block static %}
+<link rel="shortcut icon" href="{% static 'images/logo/logoceara.ico' %}"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/orders/orderpaper.css' %}">
+{% endblock static %}
+
+{% block title %}
+<title>Comanda</title>
+{% endblock title %}
+
+{% block body %}
+<section id="paper">
+    <h3 class="title">CEARÁ</h3>
+    <h4 class="category">{{pedido.tipo_pedido}}</h4>
+    <hr>
+    <p class="datetime">{{pedido.horario_recebimento}}</p>
+    <p class="identificacao"><strong>ID:</strong> {{pedido.identificacao}}</p>
+    {% if pedido.tipo_pedido == 'Delivery' %}
+    <p class="telefone"><strong>Telefone:</strong> {{pedido.telefone|default:"Não informado."}}</p>
+    {% endif %}
+    <hr>
+    <h4 class="items-title">ITENS DO PEDIDO</h4>
+    {% for pizza in pizzas %}
+    <p class="items">- {{pizza}}</p>
+    {% endfor %}
+    {% for esfiha in esfihas %}
+    <p class="items">- {{esfiha}}</p>
+    {% endfor %}
+    {% for lanche in lanches %}
+    <p class="items">- {{lanche}}</p>
+    {% endfor %}
+    {% for pastel in pasteis %}
+    <p class="items">- {{pastel}}</p>
+    {% endfor %}
+    {% for beirute in lanches %}
+    <p class="items">- {{beirute}}</p>
+    {% endfor %}
+    {% for bolo in bolos %}
+    <p class="items">- {{bolo}}</p>
+    {% endfor %}
+    {% for bebida in bebidas %}
+    <p class="items">- {{bebida}}</p>
+    {% endfor %}
+    <hr>
+    <p class="descontos"><strong>Descontos: </strong>-R$ {{pedido.desconto}}</p>
+    <p class="taxa-adicional"><strong>Taxas: </strong>+R$ {{pedido.adicional}}</p>
+    {% if pedido.tipo_pedido == 'Delivery' %}
+    <p class="taxa-entrega"><strong>Entrega: </strong>+R$ {{pedido.taxa}}</p>
+    {% endif %}
+    <p class="total"><strong>TOTAL: </strong>R$ {{pedido.total}}</p>
+    <p class="pagamento"><strong>FORMA DE PAGAMENTO: </strong>{{pedido.pagamento_solicitado}}</p>
+    <hr>
+    <p class="rodape">Pizzaria e Hamburgueria Ceará</p>
+</section>
+
+<button id="print-button" onclick="printPaper('paper')">Imprimir Comanda</button>
+
+<script>
+    function printPaper(div){
+        let comanda = document.getElementById(div).innerHTML;
+        let conteudoHtml = document.body.innerHTML;
+
+        document.body.innerHTML = comanda;
+        window.print();
+        
+        document.body.innerHTML = conteudoHtml;
+    }
+</script>
+{% endblock body %}

@@ -1,0 +1,26 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+
+{% block static %}
+<link rel="stylesheet" href="{% static 'css/costumers/editcostumer.css' %}">
+{% endblock static %}
+
+{% block title %}
+<title>Edição de Cliente</title>
+{% endblock title %}
+
+{% block body %}
+<section>
+    <div>
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                <h2>Edição de Cliente</h2>
+                {{form.as_p}}
+                <button type="submit">Salvar</button>
+                <a href="/costumers/list/" class="cancel-button">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock body %}

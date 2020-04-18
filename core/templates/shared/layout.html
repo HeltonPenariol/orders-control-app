@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'images/logo/logoceara.ico' %}"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+    
+    {% block static %}
+    {% endblock static %}
+
+    {% block title %}
+    <title>Document</title>
+    {% endblock title %}
+
+</head>
+
+<body>
+    <nav>
+        <div>
+            <a href="/">
+                <img src="{% static 'images/logo/chapeu-cangaceiro-w.png' %}" alt="">
+                <p>Pizzaria e Hamburgueria do Ceará</p>
+            </a>
+        </div>
+
+        <div>
+            <div>
+                <a href="/orders/">
+                    <img src="{% static 'images/icons/order.png' %}" alt="">
+                </a>
+            </div>
+            
+            <div>
+                <a href="/costumers/list/">
+                    <img src="{% static 'images/icons/person.png' %}" alt="">
+                </a>
+            </div>
+            
+            <div>
+                <a href="/contability/">
+                    <img src="{% static 'images/icons/cash.png' %}" alt="">
+                </a>
+            </div>
+        </div>
+    </nav>
+    {% block body %}
+    {% endblock body %}
+</body>
+</html>

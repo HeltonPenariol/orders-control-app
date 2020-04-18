@@ -1,0 +1,87 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+
+{% block static %}
+<link rel="stylesheet" href="{% static 'css/orders/listorders.css' %}">
+{% endblock static %}
+
+{% block title %}
+<title>Últimos Pedidos</title>
+{% endblock title %}
+
+{% block body %}
+<section>
+    <div>
+        <table>
+            <tr>
+                <th>Categoria</th>
+                <th>Identificação</th>
+                <th>Recebimento</th>
+                <th>Atualização</th>
+                <th>Status</th>
+                <th>Forma de Pagamento</th>
+                <th>Total</th>
+                <th>Recebidos</th>
+                <th>Detalhes</th>
+                <th>Imprimir</th>
+                <th>Editar</th>
+                <th>Deletar</th>
+                <th>Cadastrar Cliente</th>
+            </tr>
+
+            {% for pedido in pedidos %}
+            <tr>
+                <td>{{pedido.tipo_pedido}}</td>
+                <td>{{pedido.identificacao}}</td>
+                <td>{{pedido.horario_recebimento|timesince}} ago</td>
+                <td>{{pedido.horario_atualizacao|timesince}} ago</td>
+                <td><span class="status">{{pedido.status}}</span> <a href="/orders/status/{{pedido.id}}"><img src="{% static 'images/icons/change.png' %}"></a></td>
+                <td>{{pedido.pagamento_solicitado}}</td>
+                <td>R${{pedido.total}}</td>
+                <td>
+                    {% if pedido.checar_recebidos == True %}
+                    <a href="/orders/money-received/{{pedido.id}}"><img src="{% static 'images/icons/completed.jpg' %}"></a>
+                    {% else %}
+                    <a href="/orders/money-received/{{pedido.id}}"><img src="{% static 'images/icons/unfinished.jpg' %}"></a>
+                    {% endif %}
+                </td>
+                <td><a href="/orders/detail/{{pedido.id}}"><img src="{% static 'images/icons/details.png' %}"></a></td>
+                <td><a href="/orders/order-paper/{{pedido.id}}"><img src="{% static 'images/icons/print.png' %}"></a></td>
+                <td><a href="/orders/edit/{{pedido.id}}"><img src="{% static 'images/icons/edit.png' %}"></a></td>
+                <td><a href="/orders/delete/{{pedido.id}}"><img src="{% static 'images/icons/delete.png' %}"></a></td>
+                <td><a href="/costumers/create/{{pedido.id}}"><img src="{% static 'images/icons/plus.png' %}"></a></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+</section>
+
+<div>
+    <h4>Balcão: {{pedidos_balcao}}</h4>
+    <h4>Delivery: {{pedidos_delivery}}</h4>
+</div>
+
+<script>
+    let status = document.getElementsByClassName('status');
+
+    for (let index = 0; index < status.length; index++) {
+        console.log(status[index].innerHTML);
+        if (status[index].innerHTML == 'Em preparo'){
+            status[index].style.color = 'red';
+        }
+
+        else if (status[index].innerHTML == 'Em entrega'){
+            status[index].style.color = 'orange';
+        }
+
+        else if (status[index].innerHTML == 'Para retirar'){
+            status[index].style.color = 'royalblue';
+        }
+
+        else if (status[index].innerHTML == 'Concluído'){
+            status[index].style.color = 'green';
+        }
+    }
+</script>
+{% endblock body %}

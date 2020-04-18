@@ -1,0 +1,105 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+
+{% block static %}
+<link rel="stylesheet" href="{% static 'css/orders/orderdetail.css' %}">
+{% endblock static %}
+
+{% block title %}
+<title>Detalhes do Pedido</title>
+{% endblock title %}
+
+{% block body %}
+<section>
+    <div>
+        <div>
+            <h3>ITENS DO PEDIDO</h3>
+            {% if not pizzas and not esfihas and not lanches and not pasteis and not beirutes and not bebidas and not bolos %}
+            <p>Nenhum item adicionado.</p>
+            {% endif %}
+            
+            {% if pizzas %}
+            {% for pizza in pizzas %}
+            <p>
+                {{pizza}}
+            </p>
+            {% endfor %}
+            {% endif %}
+            
+            {% if esfihas %}
+            {% for esfiha in esfihas %}
+            <p>
+                {{esfiha}}
+            </p>
+            {% endfor %}
+            {% endif %}
+            
+            {% if lanches %}
+            {% for lanche in lanches %}
+            <p>
+                {{lanche}}
+            </p>
+            {% endfor %}
+            {% endif %}
+            
+            {% if pasteis %}
+            {% for pastel in pasteis %}
+            <p>
+                {{pastel}}
+            </p>
+            {% endfor %}
+            {% endif %}
+            
+            {% if beirutes %}
+            {% for beirute in beirutes %}
+            <p>
+                {{beirute}}
+            </p>
+            {% endfor %}
+            {% endif %}
+            
+            {% if bolos %}
+            {% for bolo in bolos %}
+            <p>
+                {{bolo}}
+            </p>
+            {% endfor %}
+            {% endif %}
+            
+            {% if bebidas %}
+            {% for bebida in bebidas %}
+            <p>
+                {{bebida}}
+            </p>
+            {% endfor %}
+            {% endif %}
+        </div>
+        
+        <div>
+            <div>    
+                <h1>Dados do Pedido</h1>
+                <p><strong>Horário de Recebimento:</strong> {{pedido.horario_recebimento}}</p>
+                <p><strong>Horário de Atualização:</strong> {{pedido.horario_atualizacao}}</p>
+                <p><strong>Status:</strong> {{pedido.status}}</p>
+                <p><strong>Categoria:</strong> {{pedido.tipo_pedido}}</p>
+                <p><strong>Identificação:</strong> {{pedido.identificacao|default:"Não informado."}}</p>
+                <p><strong>Telefone:</strong> {{pedido.telefone|default:"Não informado."}}</p>
+                <p><strong>Observação:</strong> {{pedido.observacao|default:"Não informado."}}</p>
+                <p><strong>Pagamento Solicitado:</strong> {{pedido.pagamento_solicitado}}</p>
+                <p><strong>Descontos:</strong> {{pedido.desconto}}</p>
+                <p><strong>Taxa Adicional: </strong>{{pedido.adicional}}</p>
+                <p><strong>Taxa de Entrega: </strong>{{pedido.taxa}}</p>
+                <p><strong>Total:</strong> R${{pedido.total}}</p>
+                <p><strong>Recebimento de Dinheiro:</strong> R${{pedido.dinheiro_recebido}}</p>
+                <p><strong>Recebimento de Débito:</strong> R${{pedido.debito_recebido}}</p>
+                <p><strong>Recebimento de Crédito:</strong> R${{pedido.credito_recebido}}</p>
+
+                <div>
+                    <a href="/orders/edit/{{pedido.id}}">Editar Pedido</a>
+                    <a href="/orders/delete/{{pedido.id}}">Cancelar Pedido</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock body %}

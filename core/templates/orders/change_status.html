@@ -1,0 +1,28 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+
+{% block static %}
+<link rel="stylesheet" href="{% static 'css/orders/changestatus.css' %}">
+{% endblock static %}
+
+{% block title %}
+<title>Alteração de Status</title>
+{% endblock title %}
+
+{% block body %}
+<h1>pedido: #ceara{{pedido.numero_identificacao}}</h1>
+
+<section>
+    <div>
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                <h2>Alteração de Status</h2>
+                {{status.as_p}}
+                <button type="submit">Salvar</button>
+                <a href="/orders/list/" class="cancel-button">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock body %}

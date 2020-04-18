@@ -1,0 +1,409 @@
+{% extends 'shared/layout.html' %}
+{% load static %}
+
+{% block static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="{% static 'css/orders/neworder.css' %}">
+{% endblock static %}
+
+{% block title %}
+<title>Novo Pedido</title>
+{% endblock title %}
+
+{% block body %}
+<section>
+    <div>
+        <div>
+            <img src="{% static 'images/icons/menu.png' %}" alt="">
+        </div>
+
+        <div>
+            <div class="item-container" onclick=showPizzaForm()>
+                <p>Pizzas</p>
+            </div>
+
+            <div class="item-container" onclick=showEsfihaForm()>
+                <p>Esfihas</p>
+            </div>
+
+            <div class="item-container" onclick=showLancheForm()>
+                <p>Lanches</p>
+            </div>
+
+            <div class="item-container" onclick=showPastelForm()>
+                <p>Pastéis</p>
+            </div>
+
+            <div class="item-container" onclick=showBeiruteForm()>
+                <p>Beirutes</p>
+            </div>
+
+            <div class="item-container" onclick=showSobremesaForm()>
+                <p>Sobremesas</p>
+            </div>
+
+            <div class="item-container" onclick=showBebidaForm()>
+                <p>Bebidas</p>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h4>#ceara{{request.user}}</h4>
+
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == 'info' %}
+        <div class="alert alert-sucess" role="alert" style="text-align: center;">
+            {{message}}
+        </div>
+        {% elif message.tags == 'success' %}
+        <div class="alert alert-danger" role="alert" style="text-align: center;">
+            {{message}}
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+        <div class="view-button order-button" onclick=showOrderItems()>
+            <div>
+                <p>Itens do Pedido</p>
+                <img id="eyeIcon" src="{% static 'images/icons/view.png' %}" alt="">
+            </div>
+        </div>
+
+        <div class="cancel-button order-button control-button">
+            <a href="/orders/">
+                <p>Cancelar</p>
+                <img src="{% static 'images/icons/cancel.png' %}" alt="">
+            </a>
+        </div>
+
+        <div class="confirm-button order-button control-button">
+            <a href="/orders/finalize/">
+                <p>Finalizar</p>
+                <img src="{% static 'images/icons/confirm.png' %}" alt="">
+            </a>
+        </div>
+
+        <h2 id="apresentationText">Selecione alguma categoria para adicionar um item ao pedido.</h2>
+
+        <div class="order-items" id="orderItems">
+            <div>
+                <h3>ITENS DO PEDIDO</h3>
+                {% if not pizzas and not esfihas and not lanches and not pasteis and not beirutes and not bebidas and not bolos %}
+                <p>Nenhum item adicionado.</p>
+                {% endif %}
+
+                {% if pizzas %}
+                {% for pizza in pizzas %}
+                <p>
+                    {{pizza}}
+                    <a href="/orders/delete-pizza/{{pizza.id}}">
+                        <img style="width: 12px;" src="{% static 'images/icons/delete.png' %}" alt="">
+                    </a>
+                </p>
+                {% endfor %}
+                {% endif %}
+
+                {% if esfihas %}
+                {% for esfiha in esfihas %}
+                <p>
+                    {{esfiha}}
+                    <a href="/orders/delete-esfiha/{{esfiha.id}}">
+                        <img style="width: 12px;" src="{% static 'images/icons/delete.png' %}" alt="">
+                    </a>
+                </p>
+                {% endfor %}
+                {% endif %}
+
+                {% if lanches %}
+                {% for lanche in lanches %}
+                <p>
+                    {{lanche}}
+                    <a href="/orders/delete-lanche/{{lanche.id}}">
+                        <img style="width: 12px;" src="{% static 'images/icons/delete.png' %}" alt="">
+                    </a>
+                </p>
+                {% endfor %}
+                {% endif %}
+
+                {% if pasteis %}
+                {% for pastel in pasteis %}
+                <p>
+                    {{pastel}}
+                    <a href="/orders/delete-pastel/{{pastel.id}}">
+                        <img style="width: 12px;" src="{% static 'images/icons/delete.png' %}" alt="">
+                    </a>
+                </p>
+                {% endfor %}
+                {% endif %}
+
+                {% if beirutes %}
+                {% for beirute in beirutes %}
+                <p>
+                    {{beirute}}
+                    <a href="/orders/delete-beirute/{{beirute.id}}">
+                        <img style="width: 12px;" src="{% static 'images/icons/delete.png' %}" alt="">
+                    </a>
+                </p>
+                {% endfor %}
+                {% endif %}
+
+                {% if bolos %}
+                {% for bolo in bolos %}
+                <p>
+                    {{bolo}}
+                    <a href="/orders/delete-bolo/{{bolo.id}}">
+                        <img style="width: 12px;" src="{% static 'images/icons/delete.png' %}" alt="">
+                    </a>
+                </p>
+                {% endfor %}
+                {% endif %}
+
+                {% if bebidas %}
+                {% for bebida in bebidas %}
+                <p>
+                    {{bebida}}
+                    <a href="/orders/delete-bebida/{{bebida.id}}">
+                        <img style="width: 12px;" src="{% static 'images/icons/delete.png' %}" alt="">
+                    </a>
+                </p>
+                {% endfor %}
+                {% endif %}
+                <p class="subtotal">SUBTOTAL: R$ {{subtotal}}</p>
+            </div>
+        </div>
+
+        <div class="pizza-container" id="pizza">
+            <h1>Adicionar Pizza</h1>
+            <div class="add-pizza">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ add_pizza.as_p }}
+                    <button type="submit" class="submit-pizza">Adicionar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="esfiha-container" id="esfiha">
+            <h1>Adicionar Esfiha</h1>
+            <div class="add-esfiha">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ add_esfiha.as_p }}
+                    <button type="submit" class="submit-group">Adicionar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="lanche-container" id="lanche">
+            <h1>Adicionar Lanche</h1>
+            <div class="add-lanche">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ add_lanche.as_p }}
+                    <button type="submit" class="submit-group">Adicionar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="pastel-container" id="pastel">
+            <h1>Adicionar Pastel</h1>
+            <div class="add-pastel">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ add_pastel.as_p }}
+                    <button type="submit" class="submit-group">Adicionar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="beirute-container" id="beirute">
+            <h1>Adicionar Beirute</h1>
+            <div class="add-beirute">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ add_beirute.as_p }}
+                    <button type="submit" class="submit-group">Adicionar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="sobremesa-container" id="sobremesa">
+            <h1>Adicionar Sobremesa</h1>
+            <div class="add-sobremesa">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ add_bolo.as_p }}
+                    <button type="submit" class="submit-group">Adicionar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="bebida-container" id="bebida">
+            <h1>Adicionar Bebida</h1>
+            <div class="add-bebida">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ add_bebida.as_p }}
+                    <button type="submit" class="submit-group">Adicionar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    var numberInput = document.querySelectorAll('input[type="number"]');
+
+    function setDefaultValue() {
+        for (i in numberInput) {
+            numberInput[i].defaultValue = "1";
+        }
+    }
+
+    window.onload = setDefaultValue();
+
+    var apresentationText = document.getElementById('apresentationText')
+    var orderItems = document.getElementById('orderItems');
+
+    var pizzaContainer = document.getElementById('pizza');
+    var esfihaContainer = document.getElementById('esfiha');
+    var lancheContainer = document.getElementById('lanche');
+    var pastelContainer = document.getElementById('pastel');
+    var beiruteContainer = document.getElementById('beirute');
+    var sobremesaContainer = document.getElementById('sobremesa');
+    var bebidaContainer = document.getElementById('bebida');
+
+    var viewItems = document.getElementsByClassName('button-view');
+    var eyeIcon = document.getElementById('eyeIcon');
+
+    function checkEyeIcon() {
+        if (orderItems.style.visibility === 'hidden') {
+            eyeIcon.src = "{% static 'images/icons/hidden.png' %}"
+        } else {
+            eyeIcon.src = "{% static 'images/icons/view.png' %}"
+        }
+    }
+
+    function showOrderItems() {
+        apresentationText.style.visibility = 'visible';
+        orderItems.style.visibility = 'visible';
+        pizzaContainer.style.visibility = 'hidden';
+        esfihaContainer.style.visibility = 'hidden';
+        lancheContainer.style.visibility = 'hidden';
+        pastelContainer.style.visibility = 'hidden';
+        beiruteContainer.style.visibility = 'hidden';
+        sobremesaContainer.style.visibility = 'hidden';
+        bebidaContainer.style.visibility = 'hidden';
+        checkEyeIcon();
+    }
+
+    function showPizzaForm() {
+        apresentationText.style.visibility = 'hidden';
+        orderItems.style.visibility = 'hidden';
+        pizzaContainer.style.visibility = 'visible';
+        esfihaContainer.style.visibility = 'hidden';
+        lancheContainer.style.visibility = 'hidden';
+        pastelContainer.style.visibility = 'hidden';
+        beiruteContainer.style.visibility = 'hidden';
+        sobremesaContainer.style.visibility = 'hidden';
+        bebidaContainer.style.visibility = 'hidden';
+        checkEyeIcon();
+    }
+
+    function showEsfihaForm() {
+        apresentationText.style.visibility = 'hidden';
+        orderItems.style.visibility = 'hidden';
+        esfihaContainer.style.visibility = 'visible';
+        pizzaContainer.style.visibility = 'hidden';
+        lancheContainer.style.visibility = 'hidden';
+        pastelContainer.style.visibility = 'hidden';
+        beiruteContainer.style.visibility = 'hidden';
+        sobremesaContainer.style.visibility = 'hidden';
+        bebidaContainer.style.visibility = 'hidden';
+        checkEyeIcon();
+    }
+
+    function showLancheForm() {
+        apresentationText.style.visibility = 'hidden';
+        orderItems.style.visibility = 'hidden';
+        lancheContainer.style.visibility = 'visible';
+        pizzaContainer.style.visibility = 'hidden';
+        esfihaContainer.style.visibility = 'hidden';
+        pastelContainer.style.visibility = 'hidden';
+        beiruteContainer.style.visibility = 'hidden';
+        sobremesaContainer.style.visibility = 'hidden';
+        bebidaContainer.style.visibility = 'hidden';
+        checkEyeIcon();
+    }
+
+    function showPastelForm() {
+        apresentationText.style.visibility = 'hidden';
+        orderItems.style.visibility = 'hidden';
+        pastelContainer.style.visibility = 'visible';
+        pizzaContainer.style.visibility = 'hidden';
+        esfihaContainer.style.visibility = 'hidden';
+        lancheContainer.style.visibility = 'hidden';
+        beiruteContainer.style.visibility = 'hidden';
+        sobremesaContainer.style.visibility = 'hidden';
+        bebidaContainer.style.visibility = 'hidden';
+        checkEyeIcon();
+    }
+
+    function showBeiruteForm() {
+        apresentationText.style.visibility = 'hidden';
+        orderItems.style.visibility = 'hidden';
+        beiruteContainer.style.visibility = 'visible';
+        pizzaContainer.style.visibility = 'hidden';
+        esfihaContainer.style.visibility = 'hidden';
+        lancheContainer.style.visibility = 'hidden';
+        pastelContainer.style.visibility = 'hidden';
+        sobremesaContainer.style.visibility = 'hidden';
+        bebidaContainer.style.visibility = 'hidden';
+        checkEyeIcon();
+    }
+
+    function showSobremesaForm() {
+        apresentationText.style.visibility = 'hidden';
+        orderItems.style.visibility = 'hidden';
+        sobremesaContainer.style.visibility = 'visible';
+        pizzaContainer.style.visibility = 'hidden';
+        esfihaContainer.style.visibility = 'hidden';
+        lancheContainer.style.visibility = 'hidden';
+        pastelContainer.style.visibility = 'hidden';
+        beiruteContainer.style.visibility = 'hidden';
+        bebidaContainer.style.visibility = 'hidden';
+        checkEyeIcon();
+    }
+
+    function showBebidaForm() {
+        apresentationText.style.visibility = 'hidden';
+        orderItems.style.visibility = 'hidden';
+        bebidaContainer.style.visibility = 'visible';
+        pizzaContainer.style.visibility = 'hidden';
+        esfihaContainer.style.visibility = 'hidden';
+        lancheContainer.style.visibility = 'hidden';
+        pastelContainer.style.visibility = 'hidden';
+        beiruteContainer.style.visibility = 'hidden';
+        sobremesaContainer.style.visibility = 'hidden';
+        checkEyeIcon();
+    }
+
+    function closeAlert() {
+        window.setTimeout(function () {
+            $(".alert").fadeTo(500, 0).slideUp(500, function () {
+                $(this).remove();
+            });
+        }, 1500);
+    }
+
+    function removeErrorList() {
+        $(".errorlist").remove();
+    }
+
+    removeErrorList();
+    window.onload = closeAlert();
+</script>
+{% endblock body %}

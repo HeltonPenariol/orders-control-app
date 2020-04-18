@@ -1,0 +1,64 @@
+section{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+section > div:nth-child(1){
+    display: flex;
+    justify-content: right;
+    margin-top: 5px;
+    width: 85%;
+}
+
+section > div:nth-child(2){
+    background-color: white;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    padding: 3px 8px;
+    width: 85%;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+td{
+    font-size: 11px;
+    font-weight: lighter;
+    height: 35px;
+    text-align: center;
+}
+
+td > a > img{
+    width: 16px;
+}
+
+th{
+    font-size: 14px;
+    height: 40px;
+}
+
+tr > th:nth-child(1){
+    width: 175px;
+}
+
+tr > th:nth-child(2){
+    width: 275px;
+}
+
+tr > th:nth-child(3){
+    width: 200px;
+}
+
+tr > th:nth-child(n+4):nth-child(-n+5){
+    width: 100px;
+}
+
+
+tr > td:nth-child(5) > a > img{
+    filter: brightness(0%);
+}
