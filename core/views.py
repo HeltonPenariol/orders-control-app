@@ -22,7 +22,6 @@ def generate_order_id():
         order_number += choice(numbers)
     return order_number
 
-# Orders
 def order_page(request):
     new_username =  generate_order_id()
     new_user = User.objects.create_user(new_username)
