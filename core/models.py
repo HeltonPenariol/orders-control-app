@@ -202,7 +202,7 @@ class RecheioBeirute(models.Model):
         verbose_name = '95. Recheio de Beirute'
         verbose_name_plural = '95. Recheios de Beirute'
 
-    nome = models.CharField(verbose_name='Recheio', max_length=255, unique=True)
+    nome = models.CharField(verbose_name='Recheio', max_length=255)
     tamanho = models.CharField(verbose_name='Tamanho do Beirute', max_length=255, choices=TAMANHOS_BEIRUTE)
     preco = models.DecimalField(verbose_name='Preço do Recheio', max_digits=4, decimal_places=2)
 
@@ -261,10 +261,10 @@ class BebidaUnidade(models.Model):
         verbose_name = '96. Bebida (Unitário)'
         verbose_name_plural = '96. Bebidas (Unitário)'
     
-    nome = models.CharField(verbose_name='Bebida', max_length=255, unique=True)
+    nome = models.CharField(verbose_name='Bebida', max_length=255)
     tipo = models.CharField(verbose_name='Tipo de Bebida', max_length=255, choices=TIPOS_BEBIDA)
     tamanho = models.CharField(verbose_name='Tamanho da Bebida', max_length=255, choices=TAMANHOS_BEBIDA)
-    preco = models.DecimalField(verbose_name='Preço do da Bebida', max_digits=4, decimal_places=2)
+    preco = models.DecimalField(verbose_name='Preço da Bebida', max_digits=4, decimal_places=2)
 
     def __str__(self):
         return f'{self.tipo}(s) - {self.nome} {self.tamanho.upper()}'
