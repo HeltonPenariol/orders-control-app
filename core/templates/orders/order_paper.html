@@ -44,6 +44,9 @@
     <p class="items">- {{bebida}}</p>
     {% endfor %}
     <hr>
+    <h4 class="observations-title">OBSERVAÇÕES</h4>
+    <p class="observacao">{{pedido.observacao}}</p>
+    <hr>
     <p class="descontos"><strong>Descontos: </strong>-R$ {{pedido.desconto}}</p>
     <p class="taxa-adicional"><strong>Taxas: </strong>+R$ {{pedido.adicional}}</p>
     {% if pedido.tipo_pedido == 'Delivery' %}

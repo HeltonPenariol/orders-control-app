@@ -58,6 +58,18 @@ button:hover{
     margin-top: 6px;
 }
 
+.observation-title{
+    margin-bottom: 8px;
+    margin-top: 8px;
+    text-align: center;
+}
+
+.observacao{
+    font-size: 13px;
+    margin-bottom: 6px;
+    margin-top: 6px;
+}
+
 .descontos, .taxa-adicional, .taxa-entrega, .total, .pagamento{
     align-items: center;
     display: flex;
